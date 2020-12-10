@@ -3,6 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import adminUrl from './common/AdminUrl'
 
 /*引入BootStarp*/
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
@@ -33,7 +34,8 @@ library.add(faUserSecret);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 /*整合AXIOS*/
-Vue.prototype.axios = axios;
+Vue.prototype.$axios = axios;
+Vue.prototype.$url = adminUrl;
 
 
 /*整合ElementUI框架*/

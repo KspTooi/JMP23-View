@@ -42,7 +42,7 @@
 
           <el-menu-item-group title="数据管理">
 
-            <el-menu-item index="/admin/login">
+            <el-menu-item index="/admin/sysUser">
               <i class="el-icon-menu"/>用户管理
             </el-menu-item>
 
@@ -74,12 +74,19 @@
 
           <b-navbar-nav>
 
-            <b-nav-item href="#">
-              <b-btn pill variant="dark">登录</b-btn>
-            </b-nav-item>
+
+
+              <b-nav-item href="#">
+                <router-link to="/admin/login">
+                  <b-btn pill variant="dark" >登录</b-btn>
+                </router-link>
+              </b-nav-item>
+
 
             <b-nav-item href="#">
-              <b-btn pill variant="dark">注销</b-btn>
+              <router-link to="/admin/logout">
+                <b-btn pill variant="dark" href="logout">注销</b-btn>
+              </router-link>
             </b-nav-item>
 
           </b-navbar-nav>
@@ -90,7 +97,9 @@
 
 
       <el-main style="padding: 0">
+
         <router-view></router-view>
+
       </el-main>
 
 

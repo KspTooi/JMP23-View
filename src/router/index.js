@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,6 +29,11 @@ const routes = [
                 path: '/',
                 name: 'index',
                 component: () => import("../components/admin/Index")
+            }
+            ,{
+                path: 'sysUser',
+                name: 'sysUser',
+                component: () => import("../components/admin/SysUser")
             }
             ,{
                 path: 'login',

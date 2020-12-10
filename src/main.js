@@ -3,7 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import adminUrl from './common/AdminUrl'
+import requestTools from './common/RequestTools.js'
 
 /*引入BootStarp*/
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
@@ -20,10 +20,13 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { dom } from '@fortawesome/fontawesome-svg-core'
 
-
-
 /*引入AXIOS*/
 import axios from "axios";
+
+/*引入弹窗组件*/
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 Vue.config.productionTip = false;
 
@@ -35,7 +38,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 /*整合AXIOS*/
 Vue.prototype.$axios = axios;
-Vue.prototype.$url = adminUrl;
+Vue.prototype.$url = requestTools;
+Vue.prototype.$rts = requestTools;
 
 
 /*整合ElementUI框架*/
@@ -45,6 +49,9 @@ Vue.use(ElementUI);
 /*整合BootStarp框架*/
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
+
+/*整合弹窗组件*/
+Vue.use(VueSweetalert2);
 
 let vue = new Vue({
     router,

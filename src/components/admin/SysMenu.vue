@@ -4,9 +4,8 @@
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
     <template v-slot:header>
-      <h6 class="mb-0">用户管理</h6>
+      <h6 class="mb-0">菜单管理</h6>
     </template>
-
 
     <b-card-body class="overflow-auto">
 
@@ -32,9 +31,9 @@
 
               <b-btn-group>
 
-                <b-btn variant="info" @click="loadModal('null','insert')">添加用户</b-btn>
+                <b-btn variant="info" @click="loadModal('null','insert')">添加菜单</b-btn>
 
-                <b-btn variant="info" @click="refreshUserList">
+                <b-btn variant="info" @click="refreshList">
                   <span class="el-icon-refresh"/>刷新
                 </b-btn>
 
@@ -60,11 +59,17 @@
                :filter-included-fields="filterOn"
 
       >
-        <template v-slot:cell(status)="data">
-          <!-- `data.value` is the value after formatted by the Formatter -->
-          <span v-if="data.item.status === 1"><b-btn variant="success" size="sm">正常</b-btn></span>
-          <span v-if="data.item.status === 0"><b-btn variant="danger" size="sm">封禁</b-btn></span>
+        <template v-slot:cell(perms)="data">
+          <span v-if="data.item.perms === null">无需权限</span>
+          {{data.item.perms}}
         </template>
+
+        <template v-slot:cell(type)="data">
+          <span v-if="data.item.type === 0"><b-btn variant="primary">目录</b-btn></span>
+          <span v-if="data.item.type === 1"><b-btn variant="success">菜单</b-btn></span>
+          <span v-if="data.item.type === 2"><b-btn variant="danger">按钮</b-btn></span>
+        </template>
+
 
         <template v-slot:cell(createTime)="data">
 
@@ -232,25 +237,21 @@ export default {
       fields: [
 
         {
-          key:"userId"
-          ,label:"用户ID"
+          key:"name"
+          ,label:"菜单名"
           ,sortable:true
         },
         {
-          key:"username"
-          ,label:"用户名"
+          key:"url"
+          ,label:"菜单地址"
         },
         {
-          key:"email"
-          ,label:"邮箱"
+          key:"perms"
+          ,label:"所属权限"
         },
         {
-          key:"mobile"
-          ,label:"手机号"
-        },
-        {
-          key:"status"
-          ,label:"状态"
+          key:"type"
+          ,label:"类型"
         },
         {
           key:"createTime"
@@ -338,7 +339,7 @@ export default {
         if(ret.data.code === this.$url.code_success){
           this.$swal.fire(ret.data.msg,"","success");
           this.$bvModal.hide("edit-user-modal");
-          this.refreshUserList();
+          this.refreshList();
           return true;
         }
 
@@ -350,31 +351,19 @@ export default {
 
     },
 
+
     //加载列数据
-    refreshUserList(){
-      this.$axios.post(this.$url.userList).then((ret)=>{
+    refreshList(){
+      this.$axios.post(this.$url.menu_list).then((ret)=>{
         this.userList = ret.data.payload;
         this.rows = ret.data.payload.length;
       });
     }
 
-
-
-
   }
-
 
   ,mounted() {
-
-    this.refreshUserList();
-
-  }
-  ,computed:{
-
-    nameState(){
-      return this.modal_user.username >= 3;
-    }
-
+    this.refreshList();
   }
 
 

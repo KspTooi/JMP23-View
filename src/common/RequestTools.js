@@ -12,6 +12,11 @@ export default {
 
     ,code_error:500
 
+
+    ,admin_account_login:server + "/admin/v1/login"
+
+    ,admin_account_logout:server + "/admin/v1/logout"
+
     ,userList:server + "/admin/v1/user/list"
 
     ,user_insert:server + "/admin/v1/user/insert"
@@ -20,9 +25,17 @@ export default {
 
     ,user_remove:server + "/admin/v1/user/remove"
 
-    ,admin_account_login:server + "/admin/v1/login"
+    ,menu_list:server + "/admin/v1/menu/list"
 
-    ,admin_account_logout:server + "/admin/v1/logout"
+    ,menu_insert:server + "/admin/v1/menu/insert"
+
+    ,menu_update:server + "/admin/v1/menu/update"
+
+    ,menu_remove:server + "/admin/v1/menu/remove"
+
+
+
+
 
 
     ,post(url,data) {

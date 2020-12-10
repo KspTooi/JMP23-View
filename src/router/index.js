@@ -34,9 +34,9 @@ const routes = [
                 component: () => import("../components/admin/SysUser")
             }
             ,{
-                path: 'login',
-                name: 'login',
-                component: () => import("../components/admin/Login")
+                path: 'sysMenu',
+                name: 'sysMenu',
+                component: () => import("../components/admin/SysMenu")
             }
         ]
     }

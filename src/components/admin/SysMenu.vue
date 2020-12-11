@@ -57,6 +57,7 @@
                :current-page="currentPage"
                :filter="filter"
                :filter-included-fields="filterOn"
+               sticky-header="400px"
 
       >
         <template v-slot:cell(perms)="data">

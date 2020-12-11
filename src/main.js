@@ -27,6 +27,20 @@ import axios from "axios";
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+//引入内部组件
+import navTop from "@/components/general/jmp23-nav-top"
+import navSideLeft from "@/components/general/jmp23-nav-side-left"
+import contentMain from "@/components/general/jmp23-content-main"
+import modalUser from "@/components/modal/jmp23-modal-user"
+import modalUser1 from "@/components/modal/jmp23-test"
+
+
+Vue.component("jmp23-nav-top",navTop)
+Vue.component("jmp23-nav-side-left",navSideLeft)
+Vue.component("jmp23-content-main",contentMain)
+Vue.component("jm23-modal-sysuser",modalUser)
+Vue.component("jmp23-test",modalUser1)
+
 
 Vue.config.productionTip = false;
 

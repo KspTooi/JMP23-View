@@ -5,6 +5,7 @@
 
     <template v-slot:header>
       <h6 class="mb-0">用户管理</h6>
+      <jm23-modal-sysuser v-model="modal_user"></jm23-modal-sysuser>
     </template>
 
 
@@ -58,10 +59,11 @@
                :current-page="currentPage"
                :filter="filter"
                :filter-included-fields="filterOn"
+               sticky-header="400px"
 
       >
         <template v-slot:cell(status)="data">
-          <!-- `data.value` is the value after formatted by the Formatter -->
+          <!-- `data.modal_data` is the modal_data after formatted by the Formatter -->
           <span v-if="data.item.status === 1"><b-btn variant="success" size="sm">正常</b-btn></span>
           <span v-if="data.item.status === 0"><b-btn variant="danger" size="sm">封禁</b-btn></span>
         </template>
@@ -96,8 +98,8 @@
     </b-card-body>
 
 
-<!--    MODAL DIALOG 模态框区域-->
-    <b-modal id="edit-user-modal" title="编辑用户" centered hide-footer>
+
+    <b-modal id="modalDialog" title="编辑用户" centered  v-if="true">
 
       <b-form @submit.prevent="req_userInfo">
 
@@ -184,16 +186,17 @@
           <b-col>
             <b-btn variant="info" type="submit" >保存</b-btn>
             <span style="margin: 0 10px"></span>
-            <b-btn variant="danger" @click="$bvModal.hide('edit-user-modal')">取消</b-btn>
+            <b-btn variant="danger" @click="$bvModal.hide('modalDialog')">取消</b-btn>
           </b-col>
 
         </b-row>
       </b-form>
 
 
-
     </b-modal>
 
+
+    <jmp23-modal-user :jmp23_modal_data="modal_user"></jmp23-modal-user>
 
 
   </b-card>
@@ -203,12 +206,14 @@
 
 <script>
 
+import Jmp23ModalUser from "@/components/modal/jmp23-modal-user";
 export default {
-
 
   name: "Login"
 
-  ,data(){
+  ,
+  components: {Jmp23ModalUser},
+  data(){
     return{
 
       //用户模态框的数据
@@ -221,6 +226,7 @@ export default {
         email:null,
         status:1,
         role:5,
+        show:false,
       },
 
 
@@ -271,7 +277,7 @@ export default {
 
       let user = ret.item;
 
-      if(reqType === "edit"){
+      if(reqType === "update"){
         this.modal_user.reqType = reqType;
         this.modal_user.userId = user.userId;
         this.modal_user.username = user.username;

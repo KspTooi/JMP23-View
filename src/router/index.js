@@ -12,11 +12,6 @@ const routes = [
         name: 'Home',
 /*        component: Home,*/
         redirect:"/admin"
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
     ,{
         path: '/admin',
@@ -27,6 +22,11 @@ const routes = [
                 path: '/',
                 name: 'index',
                 component: () => import("../components/admin/Index")
+            },
+            {
+                path: 'login',
+                name: 'login',
+                component: () => import("@/components/admin/Login")
             }
             ,{
                 path: 'sysUser',

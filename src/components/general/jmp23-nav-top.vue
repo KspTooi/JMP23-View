@@ -7,7 +7,7 @@
 
 
       <b-nav-item href="#">
-        <router-link to="/login">
+        <router-link to="/admin/login">
           <b-btn pill variant="dark" >登录</b-btn>
         </router-link>
       </b-nav-item>

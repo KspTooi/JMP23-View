@@ -21,22 +21,22 @@ const routes = [
             {
                 path: '/',
                 name: 'index',
-                component: () => import("../components/admin/Index")
+                component: () => import("@/components/admin/Index")
             },
             {
                 path: 'login',
                 name: 'login',
-                component: () => import("@/components/admin/Login")
+                component: () => import("@/views/admin/Login")
             }
             ,{
                 path: 'sysUser',
                 name: 'sysUser',
-                component: () => import("../components/admin/SysUser")
+                component: () => import("@/views/admin/SysUser")
             }
             ,{
                 path: 'sysMenu',
                 name: 'sysMenu',
-                component: () => import("../components/admin/SysMenu")
+                component: () => import("@/views/admin/SysMenu")
             }
         ]
     }

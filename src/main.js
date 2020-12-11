@@ -16,9 +16,11 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 //引入FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+
+import { faUser, faCamera } from '@fortawesome/free-solid-svg-icons'
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { dom } from '@fortawesome/fontawesome-svg-core'
+
 
 /*引入AXIOS*/
 import axios from "axios";
@@ -44,8 +46,7 @@ Vue.config.productionTip = false;
 
 
 //整合FontAwesome
-dom.watch();
-library.add(faUserSecret);
+library.add(faUser, faCamera);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 /*整合AXIOS*/

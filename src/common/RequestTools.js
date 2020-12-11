@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import swal from "sweetalert2";
 
@@ -11,7 +10,6 @@ export default {
     ,code_success:200
 
     ,code_error:500
-
 
     ,admin_account_login:server + "/admin/v1/login"
 
@@ -35,9 +33,6 @@ export default {
 
 
 
-
-
-
     ,post(url,data) {
 
         let promise = axios.post(url, data);
@@ -45,6 +40,7 @@ export default {
         promise.catch(function () {
             swal.fire("请求服务器时发生错误!", "", "error");
         })
+
 
         return promise;
     }

@@ -2,7 +2,6 @@
 
 <div>
 
-
   <!--    MODAL DIALOG 模态框区域-->
   <b-modal id="modal" title="编辑用户" centered hide-footer>
 
@@ -89,7 +88,7 @@
       <b-row style="text-align: center">
 
         <b-col>
-          <b-btn variant="info" type="submit" >保存</b-btn>
+          <b-btn variant="info" type="submit">保存</b-btn>
           <span style="margin: 0 10px"></span>
           <b-btn variant="danger" @click="$bvModal.hide('edit-user-modal')">取消</b-btn>
         </b-col>
@@ -97,8 +96,8 @@
       </b-row>
     </b-form>
 
-
   </b-modal>
+
 </div>
 
 
@@ -128,6 +127,7 @@ export default {
       deep:true
 
       ,handler(val){
+
 
         if(val.load_modal === true){
           this.$bvModal.show("modal");

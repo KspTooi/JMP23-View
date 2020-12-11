@@ -2,7 +2,7 @@
 
 <div>
 
-  <!--    MODAL DIALOG 模态框区域-->
+  <!-- MODAL DIALOG 模态框区域-->
   <b-modal id="modal" title="菜单管理" centered hide-footer>
 
     <b-form @submit.prevent="modal_request">

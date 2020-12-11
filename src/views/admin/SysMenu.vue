@@ -21,15 +21,15 @@
               <b-input-group prepend="筛选:">
                 <b-form-input v-model="filter" placeholder="按名称查询"></b-form-input>
 <!--                <b-input-group-append>
-                  <b-button :disabled="!filter" @click="filter = ''">清除</b-button>
+                  <b-button :disabled="!filter" @click="filter = ''">x</b-button>
                 </b-input-group-append>-->
               </b-input-group>
+
             </b-col>
 
-            <b-col cols="md-9">
+            <b-col cols="md-3">
 
               <b-btn-group>
-
                 <b-btn variant="info" @click="loadModal('null','insert')">添加菜单</b-btn>
 
                 <b-btn variant="info" @click="refreshList">
@@ -40,6 +40,9 @@
 
             </b-col>
 
+            <b-col cols="md-3">
+              <b-checkbox value="1" name="123" v-model="fff">仅显示父级菜单</b-checkbox>
+            </b-col>
 
           </b-row>
 
@@ -54,11 +57,14 @@
                striped bordered hover head-variant="light" foot-variant="light"
                :per-page="perPage"
                :current-page="currentPage"
-               :filter="filter"
+               :filter=filter
                :filter-included-fields="filterOn"
                sticky-header="400px"
-
+               @filtered="onFiltered"
       >
+
+
+
         <template v-slot:cell(perms)="data">
           <span v-if="data.item.perms === null">无需权限</span>
           {{data.item.perms}}
@@ -69,7 +75,6 @@
           <span v-if="data.item.type === 1"><b-btn variant="success">菜单</b-btn></span>
           <span v-if="data.item.type === 2"><b-btn variant="danger">按钮</b-btn></span>
         </template>
-
 
         <template v-slot:cell(createTime)="data">
 
@@ -134,7 +139,8 @@ export default {
       currentPage: 1,
       rows:0,
       filter: "",
-      filterOn: ["username"],
+      filterOn: ["name"],
+      fff:null,
       fields: [
 
         {
@@ -167,6 +173,10 @@ export default {
 
 
   ,methods:{
+
+    onFiltered(filterItem){
+      this.rows = filterItem.length;
+    },
 
     //加载模态框
     loadModal(ret, reqType){
@@ -248,8 +258,6 @@ export default {
 
       })
 
-
-
     },
 
 
@@ -265,7 +273,7 @@ export default {
 
   ,mounted() {
     this.refreshList();
-  }
+  },
 
 
 }

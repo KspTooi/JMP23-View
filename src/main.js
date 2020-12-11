@@ -27,6 +27,9 @@ import axios from "axios";
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+import user from "@/components/modal/jmp23-modal-test"
+import jmru from "@/components/modal/jmp23-modal-request-user"
+
 
 Vue.config.productionTip = false;
 
@@ -35,11 +38,14 @@ Vue.config.productionTip = false;
 dom.watch();
 library.add(faUserSecret);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('jmp23-modal-user', user);
+Vue.component('jmp23-modal-request-user', jmru);
 
 /*整合AXIOS*/
 Vue.prototype.$axios = axios;
 Vue.prototype.$url = requestTools;
 Vue.prototype.$rts = requestTools;
+
 
 
 /*整合ElementUI框架*/

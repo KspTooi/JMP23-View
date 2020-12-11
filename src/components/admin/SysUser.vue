@@ -58,8 +58,8 @@
                :current-page="currentPage"
                :filter="filter"
                :filter-included-fields="filterOn"
-
       >
+
         <template v-slot:cell(status)="data">
           <!-- `data.value` is the value after formatted by the Formatter -->
           <span v-if="data.item.status === 1"><b-btn variant="success" size="sm">正常</b-btn></span>
@@ -93,107 +93,11 @@
 <!--      <p class="mt-3">Current Page: {{ currentPage }}</p>-->
 
 
+      <jmp23-modal-request-user :jmp23_modal_data="modal_user" :done="()=>{this.refreshUserList()}"></jmp23-modal-request-user>
+      <b-btn variant="success" @click="modal_user.reqType='update'">UPDATE</b-btn>
+      <b-btn variant="success" @click="modal_user.load_modal=true">LOAD</b-btn>
+
     </b-card-body>
-
-
-<!--    MODAL DIALOG 模态框区域-->
-    <b-modal id="edit-user-modal" title="编辑用户" centered hide-footer>
-
-      <b-form @submit.prevent="req_userInfo">
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>用户名:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-form-input size="sm" v-model="modal_user.username" required></b-form-input>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>密码:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-form-input type="password" size="sm" v-model="modal_user.password" required></b-form-input>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>手机号:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-form-input size="sm" v-model="modal_user.mobile" required></b-form-input>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>邮箱:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-form-input size="sm" v-model="modal_user.email" required></b-form-input>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>状态:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-radio-group size="sm" v-model="modal_user.status" required>
-              <b-radio value="1">启用</b-radio>
-              <b-radio value="0">禁用</b-radio>
-            </b-radio-group>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>角色:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-select v-model="modal_user.role" size="sm" required>
-              <b-select-option value="5">管理员</b-select-option>
-              <b-select-option value="6">测试人员</b-select-option>
-            </b-select>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="text-align: center">
-
-          <b-col>
-            <b-btn variant="info" type="submit" >保存</b-btn>
-            <span style="margin: 0 10px"></span>
-            <b-btn variant="danger" @click="$bvModal.hide('edit-user-modal')">取消</b-btn>
-          </b-col>
-
-        </b-row>
-      </b-form>
-
-
-
-    </b-modal>
-
 
 
   </b-card>
@@ -204,7 +108,6 @@
 <script>
 
 export default {
-
 
   name: "Login"
 
@@ -221,6 +124,7 @@ export default {
         email:null,
         status:1,
         role:5,
+        load_modal:false
       },
 
 
@@ -279,7 +183,7 @@ export default {
         this.modal_user.email = user.email;
         this.modal_user.mobile = user.mobile;
         this.modal_user.status = user.status;
-        this.$bvModal.show("edit-user-modal");
+        this.modal_user.load_modal = true;
         return true;
       }
 
@@ -299,7 +203,6 @@ export default {
         return true;
       }
 
-
       this.modal_user.reqType = reqType;
       this.modal_user.userId = null;
       this.modal_user.username = null;
@@ -307,75 +210,29 @@ export default {
       this.modal_user.email = null;
       this.modal_user.mobile = null;
       this.modal_user.status = null;
-      this.$bvModal.show("edit-user-modal");
 
-    },
-
-    //处理用户数据请求
-    req_userInfo(){
-
-      let data = this.modal_user;
-      let url = this.$url.user_update;
-
-      if(this.modal_user.reqType === "insert"){
-        url = this.$url.user_insert;
-      }
-
-      if(this.modal_user.reqType === "update"){
-        url = this.$url.user_update;
-      }
-
-      if(this.modal_user.reqType === "remove"){
-        url = this.$url.user_remove;
-      }
-
-      let req = this.$rts.post(url,data);
-
-
-      req.then((ret)=>{
-
-
-        if(ret.data.code === this.$url.code_success){
-          this.$swal.fire(ret.data.msg,"","success");
-          this.$bvModal.hide("edit-user-modal");
-          this.refreshUserList();
-          return true;
-        }
-
-        this.$swal.fire(ret.data.msg,"","error");
-
-      })
-
-
+      this.modal_user.load_modal = true;
 
     },
 
     //加载列数据
     refreshUserList(){
+
       this.$axios.post(this.$url.userList).then((ret)=>{
         this.userList = ret.data.payload;
         this.rows = ret.data.payload.length;
       });
+
     }
-
-
 
 
   }
 
 
   ,mounted() {
-
     this.refreshUserList();
-
   }
-  ,computed:{
 
-    nameState(){
-      return this.modal_user.username >= 3;
-    }
-
-  }
 
 
 }

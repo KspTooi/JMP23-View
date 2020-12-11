@@ -3,7 +3,11 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+
+
+//引入内部常量
 import requestTools from './common/RequestTools.js'
+import tableFields from "@/components/table/jmp23-table-fields"
 
 /*引入BootStarp*/
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
@@ -34,12 +38,16 @@ import navTop from "@/components/general/jmp23-nav-top"
 import navSideLeft from "@/components/general/jmp23-nav-side-left"
 import contentMain from "@/components/general/jmp23-content-main"
 import modalUser from "@/components/modal/jmp23-modal-request-user"
+import tableMenu from "@/components/table/jmp23-table-menu"
+import tableUser from "@/components/table/jmp23-table-user"
 
 
 Vue.component("jmp23-nav-top",navTop)
 Vue.component("jmp23-nav-side-left",navSideLeft)
 Vue.component("jmp23-content-main",contentMain)
 Vue.component("jmp23-modal-request-user",modalUser)
+Vue.component("jmp23-table-menu",tableMenu)
+Vue.component("jmp23-table-user",tableUser)
 
 
 Vue.config.productionTip = false;
@@ -53,6 +61,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.prototype.$axios = axios;
 Vue.prototype.$url = requestTools;
 Vue.prototype.$rts = requestTools;
+Vue.prototype.$tf = tableFields;
 
 
 /*整合ElementUI框架*/

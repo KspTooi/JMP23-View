@@ -8,6 +8,11 @@ Vue.use(VueRouter)
 const routes = [
 
     {
+        path: '/order',
+        name: 'order',
+        component: () => import("../views/admin/Order")
+    },
+    {
         path: '/',
         name: 'Home',
 /*        component: Home,*/

@@ -49,48 +49,7 @@
       </b-card>
 
 
-      <b-table id="my-table"
-               :items="userList"
-               :fields="fields"
-               striped bordered hover head-variant="light" foot-variant="light"
-               :per-page="perPage"
-               :current-page="currentPage"
-               :filter="filter"
-               :filter-included-fields="filterOn"
-               sticky-header="400px"
-
-      >
-        <template v-slot:cell(status)="data">
-          <!-- `data.modal_data` is the modal_data after formatted by the Formatter -->
-          <span v-if="data.item.status === 1"><b-btn variant="success" size="sm">正常</b-btn></span>
-          <span v-if="data.item.status === 0"><b-btn variant="danger" size="sm">封禁</b-btn></span>
-        </template>
-
-        <template v-slot:cell(createTime)="data">
-
-          <b-btn variant="info" size="sm" @click="loadModal(data,'update')">
-            <i class="el-icon-edit"></i>
-          </b-btn>
-
-          <span style="margin: 0 2px"></span>
-
-          <b-btn variant="danger" size="sm" @click="loadModal(data,'remove')">
-            <i class="el-icon-delete"></i>
-          </b-btn>
-
-        </template>
-
-      </b-table>
-
-
-      <b-pagination
-          v-model="currentPage"
-          :total-rows="rows"
-          :per-page="perPage"
-          aria-controls="my-table"
-      />
-
-<!--      <p class="mt-3">Current Page: {{ currentPage }}</p>-->
+      <jmp23-table-user :jmp23_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove"/>
 
 
     </b-card-body>
@@ -114,8 +73,29 @@ export default {
   data(){
     return{
 
+
+      table_data:{
+
+        currentPage:1
+        ,rows:0
+        ,perPage:8
+        ,fields: this.$tf.fields_menu
+        ,items:[]
+
+        ,filters:{
+          filter: null,
+          filterOn: null,
+        }
+
+        ,table_control:{
+          commit:false,
+          request:[]
+        }
+
+      }
+
       //用户模态框的数据
-      modal_user:{
+      ,modal_user:{
         reqType:"insert",
         load_modal:false,
 
@@ -170,9 +150,27 @@ export default {
 
   ,methods:{
 
-    //加载模态框
-    loadModal(ret, reqType){
+    onUpdate(nvar){
 
+
+
+      this.modal_user.reqType = "update";
+      this.modal_user.load_modal = true;
+      this.modal_user.userId = nvar.userId;
+      this.modal_user.username = nvar.username;
+      this.modal_user.password = nvar.password;
+      this.modal_user.email = nvar.email;
+      this.modal_user.mobile = nvar.mobile;
+      this.modal_user.status = nvar.status;
+
+    }
+
+    ,onRemove(nvar){
+
+    }
+
+    //加载模态框
+    ,loadModal(ret, reqType){
 
       let user = ret.item;
 

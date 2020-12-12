@@ -28,11 +28,10 @@
 <script>
 export default {
 
-
-
   name: "jmv33-modal"
 
   ,props:{
+
     jmv33_modal_data:{
 
       type:Object

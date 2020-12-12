@@ -3,12 +3,19 @@
 
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
+
+    <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="{}">
+
+
+
+    </jmv33-modal>
+
+
     <template v-slot:header>
       <h6 class="mb-0">菜单管理</h6>
     </template>
 
     <b-card-body class="overflow-auto">
-
 
       <b-card title="操作">
 
@@ -55,15 +62,12 @@
 
 <script>
 
-import Jmp23ModalRequestMenu from "@/components/modal/jmp23-modal-request-menu";
 
 export default{
 
   name: "Login"
 
-  ,components: {Jmp23ModalRequestMenu},
-
-  watch:{
+  ,watch:{
 
     parentOnly:{
 
@@ -102,19 +106,12 @@ export default{
 
       ,modal_data:{
 
-        reqType:"insert",
-
-        request_url:{
-          insert:this.$url.insert_user
-          ,update:this.$url.update_user
-          ,remove:this.$url.remove_user
-        }
-
+        title: '菜单管理'
+        ,reqType:"insert"
+        ,insert:this.$rts.insert_menu
+        ,update:this.$rts.update_menu
+        ,remove:this.$rts.remove_menu
         ,request:{
-
-          parents:{
-
-          }
 
         }
 

@@ -37,7 +37,6 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import navTop from "@/components/general/jmp23-nav-top"
 import navSideLeft from "@/components/general/jmp23-nav-side-left"
 import contentMain from "@/components/general/jmp23-content-main"
-import modalUser from "@/components/modal/jmp23-modal-request-user"
 import tableHead from "@/components/table/jmp23-table-head"
 
 
@@ -56,7 +55,6 @@ import jmv33SelectGeneral from "@/components/jmv33-components/table/jmv33-table-
 Vue.component("jmp23-nav-top",navTop)
 Vue.component("jmp23-nav-side-left",navSideLeft)
 Vue.component("jmp23-content-main",contentMain)
-Vue.component("jmp23-modal-request-user",modalUser)
 Vue.component("jmp23-table-head",tableHead)
 
 

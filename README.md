@@ -1,24 +1,12 @@
-# jmp32_view
+VUE学习项目
 
-## Project setup
-```
-npm install
-```
+#路由  
+#拦截(路由守卫)  
+#ElementUI  
+#**BootStarpVue  
+#**AXIOS  
+#**组件封装(重点) 
+#前端布局  
+#前端样式
+#JavaScript  
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

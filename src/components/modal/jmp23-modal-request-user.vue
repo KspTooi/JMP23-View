@@ -128,7 +128,6 @@ export default {
 
       ,handler(val){
 
-
         if(val.load_modal === true){
           this.$bvModal.show("modal");
           val.load_modal = false;

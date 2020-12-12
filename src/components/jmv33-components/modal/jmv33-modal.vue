@@ -2,7 +2,6 @@
 
   <b-modal id="modal" :title="modal_data.title" centered hide-footer>
 
-
     <b-form @submit.prevent="modal_request">
 
       <slot name="modal_content" v-bind="modal_data.request"/>
@@ -74,7 +73,6 @@ export default {
     jmv33_modal_data:{
       deep:true
       ,handler(nvar){
-        console.log(nvar)
         this.modal_data.reqType = nvar.reqType;
         this.modal_data.request = nvar.request;
       }
@@ -113,18 +111,18 @@ export default {
 
     ,modal_request(){
 
-      let url = this.$url.update_user;
+      let url = this.modal_data.update;
 
       if(this.modal_data.reqType === "insert"){
-        url = this.$url.insert_user;
+        url = this.modal_data.insert;
       }
 
       if(this.modal_data.reqType === "update"){
-        url = this.$url.update_user;
+        url = this.modal_data.update;
       }
 
       if(this.modal_data.reqType === "remove"){
-        url = this.$url.remove_user;
+        url = this.modal_data.remove;
       }
 
       let req = this.$rts.post(url,this.modal_data.request);

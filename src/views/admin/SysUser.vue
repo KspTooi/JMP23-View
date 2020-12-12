@@ -12,7 +12,7 @@
           </b-col>
 
           <b-col sm="9">
-            <b-form-input size="sm" v-model="data.username" required></b-form-input>
+            <b-form-input size="sm" v-model="modal_data.request.username" required></b-form-input>
           </b-col>
 
         </b-row>
@@ -24,7 +24,7 @@
           </b-col>
 
           <b-col sm="9">
-            <b-form-input type="password" size="sm" v-model="data.password" required></b-form-input>
+            <b-form-input type="password" size="sm" v-model="modal_data.request.password" required></b-form-input>
           </b-col>
 
         </b-row>
@@ -36,7 +36,7 @@
           </b-col>
 
           <b-col sm="9">
-            <b-form-input size="sm" v-model="data.mobile" required></b-form-input>
+            <b-form-input size="sm" v-model="modal_data.request.mobile" required></b-form-input>
           </b-col>
 
         </b-row>
@@ -48,7 +48,7 @@
           </b-col>
 
           <b-col sm="9">
-            <b-form-input size="sm" v-model="data.email" required></b-form-input>
+            <b-form-input size="sm" v-model="modal_data.request.email" required></b-form-input>
           </b-col>
 
         </b-row>
@@ -60,7 +60,7 @@
           </b-col>
 
           <b-col sm="9">
-            <b-radio-group size="sm" v-model="data.status" required>
+            <b-radio-group size="sm" v-model="modal_data.request.status" required>
               <b-radio value="1">启用</b-radio>
               <b-radio value="0">禁用</b-radio>
             </b-radio-group>
@@ -75,7 +75,7 @@
           </b-col>
 
           <b-col sm="9">
-            <b-select v-model="data.role" size="sm" required>
+            <b-select v-model="modal_data.request.role" size="sm" required>
               <b-select-option value="5">管理员</b-select-option>
               <b-select-option value="6">测试人员</b-select-option>
             </b-select>
@@ -188,12 +188,16 @@ export default {
 
     //加入列表
     onInsert(){
-      this.$refs.modal.loadClear();
+      this.modal_data.request={}
+      this.modal_data.reqType="insert"
+      this.$refs.modal.load();
     }
 
     //更新列表
     ,onUpdate(nvar) {
+
       this.modal_data.request = nvar.item;
+
       this.modal_data.request.role = 5;
       this.modal_data.reqType = "update";
 

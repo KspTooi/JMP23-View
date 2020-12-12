@@ -4,9 +4,96 @@
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
 
-    <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="{}">
+    <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()">
+
+      <template v-slot:modal_content="data">
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="4">
+            <label>父级菜单:</label>
+          </b-col>
+
+          <b-col sm="8">
+            <jmv33-select :url="$rts.list_menu" :payload="{parentId:0}" field_value="menuId" field_text="name" v-model="modal_data.request.parentId" show-zero-value="true"/>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="4">
+            <label>菜单名:</label>
+          </b-col>
+
+          <b-col sm="8">
+            <b-form-input size="sm" v-model="modal_data.request.name" required></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="4">
+            <label>菜单地址:</label>
+          </b-col>
+
+          <b-col sm="8">
+            <b-form-input size="sm" v-model="modal_data.request.url" required></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="4">
+            <label>权限节点:</label>
+          </b-col>
+
+          <b-col sm="8">
+            <b-form-input size="sm" v-model="modal_data.request.perms"></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="4">
+            <label>菜单类型:</label>
+          </b-col>
+
+          <b-col sm="8">
+            <b-form-input size="sm" v-model="modal_data.request.type" required></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="4">
+            <label>菜单图标:</label>
+          </b-col>
+
+          <b-col sm="8">
+            <b-form-input size="sm" v-model="modal_data.request.icon" required></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="4">
+            <label>排序值:</label>
+          </b-col>
+
+          <b-col sm="8">
+            <b-form-input size="sm" v-model="modal_data.request.orderNum" required></b-form-input>
+          </b-col>
+
+        </b-row>
 
 
+      </template>
 
     </jmv33-modal>
 
@@ -26,9 +113,6 @@
             <template v-slot:headExtra>
               <b-col cols="md-3">
                 <b-checkbox value="true" v-model="parentOnly">仅显示父级菜单</b-checkbox>
-
-                <jmv33-select :url="$rts.list_menu" :payload="{parentId:0}" field_value="menuId" field_text="name" default="0"/>
-
               </b-col>
             </template>
           </jmp23-table-head>
@@ -96,9 +180,11 @@ export default{
   ,data(){
     return{
 
-      parentOnly:false
+      parentOnly:false,
 
-      ,table_data:{
+
+
+      table_data:{
 
         url: this.$rts.list_menu
         ,fields: this.$tf.fields_menu
@@ -117,8 +203,13 @@ export default{
         ,insert:this.$rts.insert_menu
         ,update:this.$rts.update_menu
         ,remove:this.$rts.remove_menu
-        ,request:{
 
+        ,parents:{
+
+        }
+
+        ,request:{
+          parentId:35
         }
 
       }
@@ -131,6 +222,10 @@ export default{
   ,methods:{
 
 
+    onSelectByParentId(val){
+      this.modal_data.request.parentId = val;
+    },
+
     onFilterChange(nvar){
       this.table_data.filters.filter = nvar;
     }
@@ -140,10 +235,13 @@ export default{
     }
 
     ,onInsert(){
-      this.$refs.modal.loadClear();
+      this.modal_data.request = {}
+      this.$refs.modal.load();
     }
 
     ,onUpdate(nvar){
+      this.modal_data.reqType="update";
+      this.modal_data.request = nvar.item;
       this.$refs.modal.load();
     }
 
@@ -154,16 +252,6 @@ export default{
 
   }
 
-  ,mounted(){
-
-
-    let promise = this.$axios.post(this.$rts.list_menu,{parentId:0});
-
-    promise.then((ret)=>{
-      this.modal_data.request.parents = ret.data.payload;
-    })
-
-  }
 
 
 }

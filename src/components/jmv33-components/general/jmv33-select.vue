@@ -3,17 +3,16 @@
 
   <div>
 
-    <hr>
-    <b-select v-model="currentValue">
+    <b-select v-model="currentValue" size="sm">
+
+      <b-select-option value="0" v-if="showZeroValue">无</b-select-option>
 
       <b-select-option v-for="(item,i) of select_data" :key="i" :value="item[field_value]" >
         {{item[field_text]}}
       </b-select-option>
 
     </b-select>
-    {{select_data}}
   </div>
-
 
 
 </template>
@@ -23,13 +22,18 @@
 export default {
 
   props:{
+    value:{
+      default:()=>{
+        return 0;
+      }
+    },
     url:null,
     payload:null,
     field_value:null,
     field_text:null,
-    default:{
+    showZeroValue:{
       default:()=>{
-        return 0;
+        return false;
       }
     }
   },
@@ -43,7 +47,7 @@ export default {
       select_data:null,
 
       //当前选择的值
-      currentValue:this.default
+      currentValue:this.value
 
     }
   }
@@ -51,7 +55,7 @@ export default {
   ,watch:{
     currentValue:{
       handler(val){
-        this.$emit("onSelect",val)
+        this.$emit('input',val);
       }
     }
   }

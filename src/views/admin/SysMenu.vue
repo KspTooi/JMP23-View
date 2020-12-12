@@ -30,7 +30,7 @@
             <b-col cols="md-3">
 
               <b-btn-group>
-                <b-btn variant="info" @click="loadModal('null','insert')">添加菜单</b-btn>
+                <b-btn variant="info" @click="onInsertBtn">添加菜单</b-btn>
 
                 <b-btn variant="info" @click="table_data.table_control.commit = true;parentOnly=false">
                   <span class="el-icon-refresh"/>刷新
@@ -51,13 +51,15 @@
       </b-card>
 
 
-      <jmp23-table-menu :jmp23_table_data="table_data"
+      <jmp23-table-menu ref="table" :jmp23_table_data="table_data"
                         @onUpdate="onUpdate"
                         @onRemove="onRemove"
       />
 
 
     </b-card-body>
+
+    <jmp23-modal-request-menu ref="modal" :jmp23_modal_data="modal_data"></jmp23-modal-request-menu>
 
   </b-card>
 
@@ -66,23 +68,26 @@
 
 <script>
 
-export default {
+import Jmp23ModalRequestMenu from "@/components/modal/jmp23-modal-request-menu";
+
+export default{
 
   name: "Login"
 
+  ,components: {Jmp23ModalRequestMenu},
 
-  ,watch:{
+  watch:{
 
     parentOnly:{
 
       handler(nvar){
 
         if(nvar){
-          this.table_data.table_control.commit = [true,{parentId:"0"}];
+          this.$refs.table.commit({parentId:"0"});
           return true;
         }
 
-        this.table_data.table_control.commit = true;
+        this.$refs.table.commit();
       }
 
     }
@@ -95,33 +100,39 @@ export default {
   ,data(){
     return{
 
-      table_data:{
+      parentOnly:false
 
-        table_control:{
-          commit: [false,{}],
-        },
+
+      ,table_data:{
 
         filters:{
           filter: null,
           filterOn: ["name"],
         }
 
-      },
-
-
-      //用户模态框的数据
-      modal_user:{
-        reqType:"insert",
-        userId:null,
-        username:null,
-        password:null,
-        mobile:null,
-        email:null,
-        status:1,
-        role:5,
       }
 
-      ,parentOnly:false
+      ,modal_data:{
+
+        reqType:"insert",
+
+        request_url:{
+          insert:this.$url.insert_user
+          ,update:this.$url.update_user
+          ,remove:this.$url.remove_user
+        }
+
+        ,request:{
+
+          parents:{
+
+          }
+
+        }
+
+      }
+
+
 
     }
 
@@ -131,9 +142,8 @@ export default {
   ,methods:{
 
 
-
     onUpdate(nvar){
-      console.log(nvar)
+
     }
 
     ,onRemove(nvar){
@@ -145,56 +155,23 @@ export default {
       this.rows = filterItem.length;
     },
 
-    //加载模态框
-    loadModal(ret, reqType){
-
-      let user = ret.item;
-
-      if(reqType === "edit"){
-        this.modal_user.reqType = reqType;
-        this.modal_user.userId = user.userId;
-        this.modal_user.username = user.username;
-        this.modal_user.password = user.password;
-        this.modal_user.email = user.email;
-        this.modal_user.mobile = user.mobile;
-        this.modal_user.status = user.status;
-        this.$bvModal.show("edit-user-modal");
-        return true;
-      }
-
-      if(reqType === "remove"){
-        this.modal_user.reqType = reqType;
-        this.modal_user.userId = user.userId;
-
-        this.$swal.fire({
-          title:"你确定要删除用户吗?",
-          showCancelButton:true
-        }).then((ret)=>{
-          if(ret.isConfirmed){
-            this.req_userInfo();
-          }
-        })
-
-        return true;
-      }
-
-
-      this.modal_user.reqType = reqType;
-      this.modal_user.userId = null;
-      this.modal_user.username = null;
-      this.modal_user.password = null;
-      this.modal_user.email = null;
-      this.modal_user.mobile = null;
-      this.modal_user.status = null;
-      this.$bvModal.show("edit-user-modal");
-
+    onInsertBtn(){
+      this.$refs.modal.load();
     }
 
 
   }
 
+  ,mounted(){
+
+    let promise = this.$axios.post(this.$rts.list_menu,{parentId:0});
+
+    promise.then((ret)=>{
+      this.modal_data.request.parents = ret.data.payload;
+    })
 
 
+  }
 
 
 }

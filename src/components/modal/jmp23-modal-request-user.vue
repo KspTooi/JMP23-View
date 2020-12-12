@@ -113,7 +113,19 @@ export default {
     jmp23_modal_data:Object
   },
 
-  data(){
+  watch:{
+
+    jmp23_modal_data:{
+      deep:true
+      ,handler(nvar){
+        this.modal_data.reqType = nvar.reqType;
+        this.modal_data.request = nvar.request;
+      }
+    }
+
+  }
+
+  ,data(){
     return{
 
       modal_data:{
@@ -125,9 +137,9 @@ export default {
         commit:false,
 
         request_url:{
-          insert:this.$url.user_insert
-          ,update:this.$url.user_update
-          ,remove:this.$url.user_remove
+          insert:this.$url.insert_user
+          ,update:this.$url.update_user
+          ,remove:this.$url.remove_user
         }
 
         ,request:{
@@ -171,18 +183,18 @@ export default {
 
     ,modal_request(){
 
-      let url = this.$url.user_update;
+      let url = this.$url.update_user;
 
       if(this.modal_data.reqType === "insert"){
-        url = this.$url.user_insert;
+        url = this.$url.insert_user;
       }
 
       if(this.modal_data.reqType === "update"){
-        url = this.$url.user_update;
+        url = this.$url.update_user;
       }
 
       if(this.modal_data.reqType === "remove"){
-        url = this.$url.user_remove;
+        url = this.$url.remove_user;
       }
 
       let req = this.$rts.post(url,this.modal_data.request);

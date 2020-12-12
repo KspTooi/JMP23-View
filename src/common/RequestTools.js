@@ -15,21 +15,21 @@ export default {
 
     ,admin_account_logout:server + "/admin/v1/logout"
 
-    ,userList:server + "/admin/v1/user/list"
+    ,list_user:server + "/admin/v1/user/list"
 
-    ,user_insert:server + "/admin/v1/user/insert"
+    ,insert_user:server + "/admin/v1/user/insert"
 
-    ,user_update:server + "/admin/v1/user/update"
+    ,update_user:server + "/admin/v1/user/update"
 
-    ,user_remove:server + "/admin/v1/user/remove"
+    ,remove_user:server + "/admin/v1/user/remove"
 
-    ,menu_list:server + "/admin/v1/menu/list"
+    ,list_menu:server + "/admin/v1/menu/list"
 
-    ,menu_insert:server + "/admin/v1/menu/insert"
+    ,insert_menu:server + "/admin/v1/menu/insert"
 
-    ,menu_update:server + "/admin/v1/menu/update"
+    ,update_menu:server + "/admin/v1/menu/update"
 
-    ,menu_remove:server + "/admin/v1/menu/remove"
+    ,remove_menu:server + "/admin/v1/menu/remove"
 
 
 

@@ -15,7 +15,6 @@
 
 
       <template v-slot:cell(status)="data">
-        <!-- `data.modal_data` is the modal_data after formatted by the Formatter -->
         <span v-if="data.item.status === 1"><b-btn variant="success" size="sm">正常</b-btn></span>
         <span v-if="data.item.status === 0"><b-btn variant="danger" size="sm">封禁</b-btn></span>
       </template>
@@ -63,22 +62,8 @@ export default {
 
       deep:true
       ,handler(nvar){
-
-
-        if(nvar.table_control.commit === true){
-          this.refreshTable();
-          nvar.table_control.commit = false;
-        }
-
-        if(nvar.table_control.commit[0]===true){
-          this.refreshTable(nvar.table_control.commit[1]);
-          nvar.table_control.commit[0] = false;
-          nvar.table_control.commit[1] = {};
-        }
-
         this.table_data.filters.filter = nvar.filters.filter;
         this.table_data.filters.filterOn = nvar.filters.filterOn;
-
       }
 
     }
@@ -95,7 +80,7 @@ export default {
         ,rows:0
         ,perPage:8
         ,fields: this.$tf.fields_user
-        ,url: this.$rts.userList
+        ,url: this.$rts.list_user
         ,items:[]
 
         //暴露参数
@@ -104,11 +89,7 @@ export default {
           filterOn: null,
         }
 
-        //暴露参数
-        ,table_control:{
-          commit:false,
-          request:[]
-        }
+        ,request:[]
 
       }
 
@@ -117,8 +98,14 @@ export default {
 
   ,methods:{
 
+
+    //刷新表格
+    commit(request){
+      this.refreshTable(request);
+    }
+
     //过滤器数据重载
-    onFiltered(filterItem){
+    ,onFiltered(filterItem){
       this.table_data.rows = filterItem.length;
     },
 

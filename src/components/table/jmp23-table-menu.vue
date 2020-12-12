@@ -13,7 +13,6 @@
              @filtered="onFiltered"
     >
 
-
       <template v-slot:cell(perms)="data">
         <span v-if="data.item.perms === null">无需权限</span>
         {{data.item.perms}}
@@ -68,22 +67,8 @@ export default {
 
       deep:true
       ,handler(nvar){
-
-
-        if(nvar.table_control.commit === true){
-          this.refreshTable();
-          nvar.table_control.commit = false;
-        }
-
-        if(nvar.table_control.commit[0]===true){
-          this.refreshTable(nvar.table_control.commit[1]);
-          nvar.table_control.commit[0] = false;
-          nvar.table_control.commit[1] = {};
-        }
-
         this.table_data.filters.filter = nvar.filters.filter;
         this.table_data.filters.filterOn = nvar.filters.filterOn;
-
       }
 
     }
@@ -102,15 +87,13 @@ export default {
         ,fields: this.$tf.fields_menu
         ,items:[]
 
+        //暴露参数
         ,filters:{
           filter: null,
           filterOn: null,
         }
 
-        ,table_control:{
-          commit:false,
-          request:[]
-        }
+        ,request:[]
 
       }
 
@@ -127,11 +110,16 @@ export default {
     //通过一个请求加载列数据
     refreshTable(request){
 
-      this.$axios.post(this.$url.menu_list,request).then((ret)=>{
+      this.$axios.post(this.$url.list_menu,request).then((ret)=>{
         this.table_data.items = ret.data.payload;
         this.table_data.rows = ret.data.payload.length;
       });
 
+    }
+
+    //刷新表格
+    ,commit(request){
+      this.refreshTable(request);
     }
 
 

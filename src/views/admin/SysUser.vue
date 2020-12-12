@@ -40,7 +40,6 @@
 
             </b-col>
 
-
           </b-row>
 
         </b-card-body>
@@ -48,13 +47,12 @@
       </b-card>
 
 
-      <jmp23-table-user :jmp23_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove"/>
-
+      <jmp23-table-user ref="table" :jmp23_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove"/>
 
     </b-card-body>
 
 
-    <modal ref="modal" :jmp23_modal_data="modal_data" @done="refreshUserList"></modal>
+    <jmp23-modal-request-user ref="modal" :jmp23_modal_data="modal_data" @done="refreshUserList"/>
 
 
   </b-card>
@@ -64,17 +62,12 @@
 
 <script>
 
-import modal from "@/components/modal/jmp23-modal-request-user"
 
 
 export default {
 
-  components:{
-    modal:modal
-  },
 
   name: "SysUser",
-
   data(){
     return{
 
@@ -97,10 +90,6 @@ export default {
       ,modal_data:{
 
         reqType:"insert",
-        load_modal:false,
-
-        //提交请求
-        commit:false,
 
         //请求信息
         request:{
@@ -133,13 +122,16 @@ export default {
         userId: nvar.item.userId
       }
 
+
+
       this.$swal.fire({
         title: "你确定要删除用户吗?",
-        showCancelButton: true
+        showCancelButton: true,
+        icon:"question"
       }).then((ret) => {
-
-        this.$refs.modal.commit();
-
+        if(ret.isConfirmed){
+          this.$refs.modal.commit();
+        }
       })
 
 

@@ -50,6 +50,7 @@ Vue.component("jmp23-table-menu",tableMenu)
 Vue.component("jmp23-table-user",tableUser)
 
 
+
 Vue.config.productionTip = false;
 
 

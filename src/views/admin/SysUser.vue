@@ -1,6 +1,5 @@
 <template>
 
-
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
     <template v-slot:header>
@@ -20,7 +19,7 @@
 
             <b-col cols="md-3">
               <b-input-group prepend="筛选:">
-                <b-form-input v-model="filter" placeholder="按名称查询"></b-form-input>
+                <b-form-input v-model="table_data.filters.filter" placeholder="按名称查询"></b-form-input>
 <!--                <b-input-group-append>
                   <b-button :disabled="!filter" @click="filter = ''">清除</b-button>
                 </b-input-group-append>-->
@@ -55,8 +54,7 @@
     </b-card-body>
 
 
-
-    <jmp23-modal-request-user :jmp23_modal_data="modal_user" :done="refreshUserList"></jmp23-modal-request-user>
+    <modal ref="modal" :jmp23_modal_data="modal_data" @done="refreshUserList"></modal>
 
 
   </b-card>
@@ -66,25 +64,26 @@
 
 <script>
 
+import modal from "@/components/modal/jmp23-modal-request-user"
+
+
 export default {
+
+  components:{
+    modal:modal
+  },
 
   name: "SysUser",
 
   data(){
     return{
 
-
+      //表格数据
       table_data:{
 
-        currentPage:1
-        ,rows:0
-        ,perPage:8
-        ,fields: this.$tf.fields_menu
-        ,items:[]
-
-        ,filters:{
+        filters:{
           filter: null,
-          filterOn: null,
+          filterOn: ["username"],
         }
 
         ,table_control:{
@@ -94,139 +93,72 @@ export default {
 
       }
 
-      //用户模态框的数据
-      ,modal_user:{
+      //模态框的数据
+      ,modal_data:{
+
         reqType:"insert",
         load_modal:false,
 
-        userId:null,
-        username:null,
-        password:null,
-        mobile:null,
-        email:null,
-        status:1,
-        role:5,
-      },
+        //提交请求
+        commit:false,
 
-      perPage: 8,
-      currentPage: 1,
-      rows:0,
-      filter: "",
-      filterOn: ["username"],
-      fields: [
-
-        {
-          key:"userId"
-          ,label:"用户ID"
-          ,sortable:true
-        },
-        {
-          key:"username"
-          ,label:"用户名"
-        },
-        {
-          key:"email"
-          ,label:"邮箱"
-        },
-        {
-          key:"mobile"
-          ,label:"手机号"
-        },
-        {
-          key:"status"
-          ,label:"状态"
-        },
-        {
-          key:"createTime"
-          ,label:"操作"
+        //请求信息
+        request:{
         }
 
+      }
 
-      ],
-      userList: []
     }
   }
 
 
-  ,methods:{
-
-    onUpdate(nvar){
+  ,methods: {
 
 
 
-      this.modal_user.reqType = "update";
-      this.modal_user.load_modal = true;
-      this.modal_user.userId = nvar.userId;
-      this.modal_user.username = nvar.username;
-      this.modal_user.password = nvar.password;
-      this.modal_user.email = nvar.email;
-      this.modal_user.mobile = nvar.mobile;
-      this.modal_user.status = nvar.status;
+    onUpdate(nvar) {
+      this.modal_data.request = nvar.item;
+      this.modal_data.request.role = 5;
+      this.modal_data.reqType = "update";
 
+
+      this.$refs.modal.loadWithData("update");
     }
 
-    ,onRemove(nvar){
+    ,onRemove(nvar) {
+
+      this.modal_data.reqType = "remove"
+
+      this.modal_data.request = {
+        userId: nvar.item.userId
+      }
+
+      this.$swal.fire({
+        title: "你确定要删除用户吗?",
+        showCancelButton: true
+      }).then((ret) => {
+
+        this.$refs.modal.commit();
+
+      })
+
 
     }
 
     //加载模态框
-    ,loadModal(ret, reqType){
+    ,loadModal(ret, reqType) {
 
-      let user = ret.item;
+      this.modal_data.reqType = reqType;
+      this.modal_data.request = {}
 
-      if(reqType === "update"){
-        this.modal_user.reqType = reqType;
-        this.modal_user.userId = user.userId;
-        this.modal_user.username = user.username;
-        this.modal_user.password = user.password;
-        this.modal_user.email = user.email;
-        this.modal_user.mobile = user.mobile;
-        this.modal_user.status = user.status;
-        this.modal_user.load_modal = true;
-        return true;
-      }
-
-      if(reqType === "remove"){
-        this.modal_user.reqType = reqType;
-        this.modal_user.userId = user.userId;
-
-        this.$swal.fire({
-          title:"你确定要删除用户吗?",
-          showCancelButton:true
-        }).then((ret)=>{
-          if(ret.isConfirmed){
-            this.req_userInfo();
-          }
-        })
-
-        return true;
-      }
-
-
-      this.modal_user.reqType = reqType;
-      this.modal_user.userId = null;
-      this.modal_user.username = null;
-      this.modal_user.password = null;
-      this.modal_user.email = null;
-      this.modal_user.mobile = null;
-      this.modal_user.status = null;
-      this.modal_user.load_modal = true;
-
+      this.$refs.modal.load();
     },
 
-
     //加载列数据
-    refreshUserList(){
-      this.$axios.post(this.$url.userList).then((ret)=>{
-        this.userList = ret.data.payload;
-        this.rows = ret.data.payload.length;
-      });
+    refreshUserList() {
+      this.table_data.table_control.commit = true;
     }
 
-  }
-
-  ,mounted() {
-    this.refreshUserList();
   }
 
 

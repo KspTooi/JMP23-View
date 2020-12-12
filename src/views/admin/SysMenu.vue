@@ -26,6 +26,9 @@
             <template v-slot:headExtra>
               <b-col cols="md-3">
                 <b-checkbox value="true" v-model="parentOnly">仅显示父级菜单</b-checkbox>
+
+                <jmv33-select :url="$rts.list_menu" :payload="{parentId:0}" field_value="menuId" field_text="name" default="0"/>
+
               </b-col>
             </template>
           </jmp23-table-head>
@@ -63,11 +66,14 @@
 <script>
 
 
+import Jmv33Select from "@/components/jmv33-components/general/jmv33-select";
 export default{
 
   name: "Login"
 
-  ,watch:{
+  ,
+  components: {Jmv33Select},
+  watch:{
 
     parentOnly:{
 

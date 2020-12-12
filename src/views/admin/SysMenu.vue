@@ -39,7 +39,7 @@
           </b-col>
 
           <b-col sm="8">
-            <b-form-input size="sm" v-model="modal_data.request.url" required></b-form-input>
+            <b-form-input size="sm" v-model="modal_data.request.url"></b-form-input>
           </b-col>
 
         </b-row>

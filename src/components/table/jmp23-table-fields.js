@@ -52,7 +52,7 @@ export default {
             ,label:"类型"
         },
         {
-            key:"createTime"
+            key:"options"
             ,label:"操作"
         }
     ]

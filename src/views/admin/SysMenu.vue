@@ -15,51 +15,38 @@
         <hr>
         <b-card-body>
 
-          <b-row>
-
-            <b-col cols="md-3">
-              <b-input-group prepend="筛选:">
-                <b-form-input v-model="table_data.filters.filter" placeholder="按名称查询"></b-form-input>
-<!--                <b-input-group-append>
-                  <b-button :disabled="!filter" @click="filter = ''">x</b-button>
-                </b-input-group-append>-->
-              </b-input-group>
-
-            </b-col>
-
-            <b-col cols="md-3">
-
-              <b-btn-group>
-                <b-btn variant="info" @click="onInsertBtn">添加菜单</b-btn>
-
-                <b-btn variant="info" @click="table_data.table_control.commit = true;parentOnly=false">
-                  <span class="el-icon-refresh"/>刷新
-                </b-btn>
-
-              </b-btn-group>
-
-            </b-col>
-
-            <b-col cols="md-3">
-              <b-checkbox value="true" v-model="parentOnly">仅显示父级菜单</b-checkbox>
-            </b-col>
-
-          </b-row>
+          <jmp23-table-head placeholder="按菜单名搜索" insert-btn-text="新增菜单" @onInsert="onInsert" @onRefresh="onRefresh" @onFilterChange="onFilterChange">
+            <template v-slot:headExtra>
+              <b-col cols="md-3">
+                <b-checkbox value="true" v-model="parentOnly">仅显示父级菜单</b-checkbox>
+              </b-col>
+            </template>
+          </jmp23-table-head>
 
         </b-card-body>
 
       </b-card>
 
 
-      <jmp23-table-menu ref="table" :jmp23_table_data="table_data"
-                        @onUpdate="onUpdate"
-                        @onRemove="onRemove"
-      />
+
+      <jmv33-table-general ref="table" :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove">
+
+        <template v-slot:cell(perms)="data">
+          <span v-if="data.item.perms === null">无需权限</span>
+          {{data.item.perms}}
+        </template>
+
+        <template v-slot:cell(type)="data">
+          <span v-if="data.item.type === 0"><b-btn variant="primary">目录</b-btn></span>
+          <span v-if="data.item.type === 1"><b-btn variant="success">菜单</b-btn></span>
+          <span v-if="data.item.type === 2"><b-btn variant="danger">按钮</b-btn></span>
+        </template>
+
+      </jmv33-table-general>
 
 
     </b-card-body>
 
-    <jmp23-modal-request-menu ref="modal" :jmp23_modal_data="modal_data"></jmp23-modal-request-menu>
 
   </b-card>
 
@@ -96,16 +83,17 @@ export default{
   }
 
 
-
   ,data(){
     return{
 
       parentOnly:false
 
-
       ,table_data:{
 
-        filters:{
+        url: this.$rts.list_menu
+        ,fields: this.$tf.fields_menu
+
+        ,filters:{
           filter: null,
           filterOn: ["name"],
         }
@@ -132,8 +120,6 @@ export default{
 
       }
 
-
-
     }
 
   }
@@ -142,8 +128,20 @@ export default{
   ,methods:{
 
 
-    onUpdate(nvar){
+    onFilterChange(nvar){
+      this.table_data.filters.filter = nvar;
+    }
 
+    ,onRefresh(){
+      this.$refs.table.commit();
+    }
+
+    ,onInsert(){
+      this.$refs.modal.loadClear();
+    }
+
+    ,onUpdate(nvar){
+      this.$refs.modal.load();
     }
 
     ,onRemove(nvar){
@@ -151,25 +149,16 @@ export default{
     }
 
 
-    ,onFiltered(filterItem){
-      this.rows = filterItem.length;
-    },
-
-    onInsertBtn(){
-      this.$refs.modal.load();
-    }
-
-
   }
 
   ,mounted(){
+
 
     let promise = this.$axios.post(this.$rts.list_menu,{parentId:0});
 
     promise.then((ret)=>{
       this.modal_data.request.parents = ret.data.payload;
     })
-
 
   }
 

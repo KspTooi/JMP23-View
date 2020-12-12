@@ -38,16 +38,32 @@ import navTop from "@/components/general/jmp23-nav-top"
 import navSideLeft from "@/components/general/jmp23-nav-side-left"
 import contentMain from "@/components/general/jmp23-content-main"
 import modalUser from "@/components/modal/jmp23-modal-request-user"
-import tableMenu from "@/components/table/jmp23-table-menu"
-import tableUser from "@/components/table/jmp23-table-user"
+import tableHead from "@/components/table/jmp23-table-head"
 
 
+
+//JMV33通用表格
+import jmv33TableGeneral from "@/components/jmv33-components/table/jmv33-table-general"
+
+//JMV33通用模态框
+import jmv33Modal from "@/components/jmv33-components/modal/jmv33-modal"
+
+//JMV33 带网络请求的select
+import jmv33SelectGeneral from "@/components/jmv33-components/table/jmv33-table-general"
+
+
+//JMP组件
 Vue.component("jmp23-nav-top",navTop)
 Vue.component("jmp23-nav-side-left",navSideLeft)
 Vue.component("jmp23-content-main",contentMain)
 Vue.component("jmp23-modal-request-user",modalUser)
-Vue.component("jmp23-table-menu",tableMenu)
-Vue.component("jmp23-table-user",tableUser)
+Vue.component("jmp23-table-head",tableHead)
+
+
+
+//JMV组件
+Vue.component("jmv33-table-general",jmv33TableGeneral)
+Vue.component("jmv33-modal",jmv33Modal)
 
 
 

@@ -1,18 +1,11 @@
 <template>
 
-
 </template>
 
 <script>
-
 export default {
-
-  name: "jmp23-table-general"
-
-
-
+name: "jmv33-select"
 }
-
 </script>
 
 <style scoped>

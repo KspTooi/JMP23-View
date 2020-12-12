@@ -16,11 +16,11 @@
 
         {{modal_data.parentMenu}}
         <b-col sm="8">
-          <b-select v-model="modal_data.parentMenu" size="sm" required>
+<!--          <b-select v-model="modal_data.parentMenu" size="sm" required>
             <b-select-option v-for="item in modal_data.request.parents" :value="item.menuId">
               {{ item.name }}
             </b-select-option>
-          </b-select>
+          </b-select>-->
         </b-col>
 
       </b-row>
@@ -178,8 +178,6 @@ export default {
 
 
   methods:{
-
-
 
 
     load(){

@@ -2,6 +2,91 @@
 
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
+    <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()">
+      <template v-slot:modal_content="data">
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="3">
+            <label>用户名:</label>
+          </b-col>
+
+          <b-col sm="9">
+            <b-form-input size="sm" v-model="data.username" required></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="3">
+            <label>密码:</label>
+          </b-col>
+
+          <b-col sm="9">
+            <b-form-input type="password" size="sm" v-model="data.password" required></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="3">
+            <label>手机号:</label>
+          </b-col>
+
+          <b-col sm="9">
+            <b-form-input size="sm" v-model="data.mobile" required></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="3">
+            <label>邮箱:</label>
+          </b-col>
+
+          <b-col sm="9">
+            <b-form-input size="sm" v-model="data.email" required></b-form-input>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="3">
+            <label>状态:</label>
+          </b-col>
+
+          <b-col sm="9">
+            <b-radio-group size="sm" v-model="data.status" required>
+              <b-radio value="1">启用</b-radio>
+              <b-radio value="0">禁用</b-radio>
+            </b-radio-group>
+          </b-col>
+
+        </b-row>
+
+        <b-row style="margin: 1rem 3rem">
+
+          <b-col sm="3">
+            <label>角色:</label>
+          </b-col>
+
+          <b-col sm="9">
+            <b-select v-model="data.role" size="sm" required>
+              <b-select-option value="5">管理员</b-select-option>
+              <b-select-option value="6">测试人员</b-select-option>
+            </b-select>
+          </b-col>
+
+        </b-row>
+
+      </template>
+    </jmv33-modal>
+
+
     <template v-slot:header>
       <h6 class="mb-0">用户管理</h6>
     </template>
@@ -15,44 +100,27 @@
 
         <b-card-body>
 
-          <b-row>
-
-            <b-col cols="md-3">
-              <b-input-group prepend="筛选:">
-                <b-form-input v-model="table_data.filters.filter" placeholder="按名称查询"></b-form-input>
-<!--                <b-input-group-append>
-                  <b-button :disabled="!filter" @click="filter = ''">清除</b-button>
-                </b-input-group-append>-->
-              </b-input-group>
-            </b-col>
-
-            <b-col cols="md-9">
-
-              <b-btn-group>
-
-                <b-btn variant="info" @click="loadModal('null','insert')">添加用户</b-btn>
-
-                <b-btn variant="info" @click="refreshUserList">
-                  <span class="el-icon-refresh"/>刷新
-                </b-btn>
-
-              </b-btn-group>
-
-            </b-col>
-
-          </b-row>
+          <jmp23-table-head :jmp23_table_head_data="table_head_data" @onInsert="onInsert" @onRefresh="onRefresh" @onFilterChange="onFilterChange"/>
 
         </b-card-body>
 
       </b-card>
 
 
-      <jmp23-table-user ref="table" :jmp23_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove"/>
+
+      <jmv33-table-general ref="table" :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove">
+
+        <template v-slot:cell(status)="data">
+          <span v-if="data.item.status === 1"><b-btn variant="success" size="sm">正常</b-btn></span>
+          <span v-if="data.item.status === 0"><b-btn variant="danger" size="sm">封禁</b-btn></span>
+        </template>
+
+      </jmv33-table-general>
+
 
     </b-card-body>
 
 
-    <jmp23-modal-request-user ref="modal" :jmp23_modal_data="modal_data" @done="refreshUserList"/>
 
 
   </b-card>
@@ -63,25 +131,28 @@
 <script>
 
 
-
 export default {
 
-
   name: "SysUser",
+
   data(){
     return{
+
+      //表头数据
+      table_head_data:{
+        placeholder:"按名称筛选"
+        ,insertBtnText:"新增用户"
+      },
 
       //表格数据
       table_data:{
 
-        filters:{
-          filter: null,
-          filterOn: ["username"],
-        }
+        url: this.$rts.list_user
+        ,fields: this.$tf.fields_user
 
-        ,table_control:{
-          commit:false,
-          request:[]
+        ,filters:{
+          filter: '',
+          filterOn: ["username"],
         }
 
       }
@@ -89,10 +160,12 @@ export default {
       //模态框的数据
       ,modal_data:{
 
-        reqType:"insert",
-
-        //请求信息
-        request:{
+        title:'用户管理'
+        ,reqType:"insert"
+        ,insert:this.$rts.insert_user
+        ,update:this.$rts.update_user
+        ,remove:this.$rts.remove_user
+        ,request:{
         }
 
       }
@@ -103,17 +176,31 @@ export default {
 
   ,methods: {
 
+    //刷新列表
+    onRefresh(){
+      this.$refs.table.commit();
+    },
 
+    //列表查询条件更改
+    onFilterChange(nvar){
+      this.table_data.filters.filter = nvar;
+    },
 
-    onUpdate(nvar) {
+    //加入列表
+    onInsert(){
+      this.$refs.modal.loadClear();
+    }
+
+    //更新列表
+    ,onUpdate(nvar) {
       this.modal_data.request = nvar.item;
       this.modal_data.request.role = 5;
       this.modal_data.reqType = "update";
 
-
-      this.$refs.modal.loadWithData("update");
+      this.$refs.modal.load();
     }
 
+    //删除列表
     ,onRemove(nvar) {
 
       this.modal_data.reqType = "remove"
@@ -121,8 +208,6 @@ export default {
       this.modal_data.request = {
         userId: nvar.item.userId
       }
-
-
 
       this.$swal.fire({
         title: "你确定要删除用户吗?",
@@ -134,21 +219,6 @@ export default {
         }
       })
 
-
-    }
-
-    //加载模态框
-    ,loadModal(ret, reqType) {
-
-      this.modal_data.reqType = reqType;
-      this.modal_data.request = {}
-
-      this.$refs.modal.load();
-    },
-
-    //加载列数据
-    refreshUserList() {
-      this.table_data.table_control.commit = true;
     }
 
   }

@@ -247,6 +247,21 @@ export default{
 
     ,onRemove(nvar){
 
+      this.modal_data.reqType = "remove"
+
+      this.modal_data.request = {
+        menuId: nvar.item.menuId
+      }
+
+      this.$swal.fire({
+        title: "你确定要删除菜单吗?",
+        showCancelButton: true,
+        icon:"question"
+      }).then((ret) => {
+        if(ret.isConfirmed){
+          this.$refs.modal.commit();
+        }
+      })
     }
 
 

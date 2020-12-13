@@ -3,6 +3,25 @@ import swal from "sweetalert2";
 
 let server = "http://127.0.0.1:18001";
 
+
+axios.interceptors.request.use(
+    config => {
+
+        let jToken = sessionStorage.getItem("jToken");
+
+
+        if(jToken!==null){
+            config.headers.jToken = jToken;
+            return config;
+        }
+
+        delete axios.defaults.headers.common["jToken"];
+
+        return config
+    }
+)
+
+
 export default {
 
     name: "RequestTools"
@@ -35,6 +54,7 @@ export default {
 
     ,post(url,data) {
 
+
         let promise = axios.post(url, data);
 
         promise.catch(function () {
@@ -44,6 +64,8 @@ export default {
 
         return promise;
     }
+
+
 
 
 }

@@ -14,9 +14,7 @@
         <div style="margin-top: 0.1vw;font-size: 18px;color: #c1c7cd;float: left;margin-left: 1vw">管理控制台</div>
       </b-btn>
 
-
       <div style="clear: both"></div>
-
 
 
       <el-menu-item-group title="">
@@ -26,11 +24,7 @@
       </el-menu-item-group>
 
 
-
-
       <el-submenu index="1">
-
-
 
         <template slot="title">
           <i class="el-icon-cpu"></i>可用的操作
@@ -56,8 +50,31 @@
       </el-submenu>
 
 
+      <el-submenu index="200">
+        <template slot="title">
+          <i class="el-icon-cpu"></i>不可用的操作
+        </template>
+
+        <el-submenu :index="item.menuId" v-for="item of nav_data" v-if="item.parentId===0">
+
+          <template slot="title">
+            <i class="el-icon-cpu"></i>{{item.name}}
+          </template>
+
+          <el-menu-item :index="item2.url" v-for="item2 of nav_data" v-if="item2.parentId===item.menuId">
+            <i class="el-icon-menu"/>{{item2.name}}
+          </el-menu-item>
+
+        </el-submenu>
+
+      </el-submenu>
+
+
+
+
 
     </el-menu>
+
 
   </el-aside>
 
@@ -67,8 +84,50 @@
 
 <script>
 export default {
-  name: "jmp23-nav-side-left"
+  name: "jmp23-nav-side-left",
+
+
+  props:{
+    value:Object
+  }
+
+  ,data(){
+    return{
+
+      nav_data:{
+
+      }
+
+
+    }
+  },
+
+  watch:{
+
+    nav_data:{
+      deep:true,
+      handler(val){
+        this.$emit("input",val);
+      }
+    }
+
+  }
+
+
+
+  ,mounted() {
+
+
+    this.$axios.post(this.$rts.list_menu).then((ret)=>{
+      this.nav_data = ret.data.payload;
+    });
+
+
+  }
+
+
 }
+
 </script>
 
 <style scoped>

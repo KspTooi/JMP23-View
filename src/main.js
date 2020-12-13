@@ -90,6 +90,20 @@ Vue.use(BootstrapVueIcons);
 /*整合弹窗组件*/
 Vue.use(VueSweetalert2);
 
+router.beforeEach((to, from, next) => {
+
+
+    if(to.path === "/logout"){
+        console.log("用户登出!");
+        sessionStorage.clear();
+        next(from);
+    }
+
+    next();
+
+})
+
+
 let vue = new Vue({
     router,
     store,

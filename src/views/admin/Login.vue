@@ -91,11 +91,14 @@ export default {
       req.then((ret)=>{
 
         if(ret.data.code === this.$rts.code_success){
+
           this.$swal.fire(ret.data.msg,"","success").then(()=>{
-
             this.$router.push("/");
-
           });
+
+          //存储token
+          sessionStorage.setItem("jToken",ret.data.payload);
+
           return true;
         }
 
@@ -109,14 +112,10 @@ export default {
 
 
 
-
-
-
     onSubmit(evt) {
       evt.preventDefault()
       alert(JSON.stringify(this.req_data))
     },
-
 
 
 

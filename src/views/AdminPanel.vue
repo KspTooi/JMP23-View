@@ -6,8 +6,7 @@
 
 
 
-    <jmp23-nav-side-left/>
-
+    <jmp23-nav-side-left v-model="data"/>
 
 
     <el-container>
@@ -31,9 +30,16 @@
 
 
 
-
 <script>
+export default {
 
+  data(){
+    return{
+      data:null
+    }
+  }
+
+}
 
 
 </script>

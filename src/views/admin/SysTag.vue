@@ -7,7 +7,40 @@
 
     <template v-slot:area-modal>
 
-      <jmv33-modal></jmv33-modal>
+      <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()">
+
+        <template v-slot:modal_content>
+          <b-row style="margin: 1rem 3rem">
+
+            <b-col sm="4">
+              <label>标签名:</label>
+            </b-col>
+
+            <b-col sm="8">
+              <b-form-input size="sm" v-model="modal_data.request.name" required></b-form-input>
+            </b-col>
+
+          </b-row>
+
+          <b-row style="margin: 1rem 3rem">
+
+            <b-col sm="4">
+              <label>标签类型:</label>
+            </b-col>
+
+            <b-col sm="8">
+              <b-select v-model="modal_data.request.type" size="sm">
+                <b-select-option value="0">系统标签</b-select-option>
+                <b-select-option value="1">用户标签</b-select-option>
+              </b-select>
+            </b-col>
+
+          </b-row>
+
+          <hr>
+        </template>
+
+      </jmv33-modal>
 
     </template>
 
@@ -21,7 +54,7 @@
 
     <template v-slot:area-table>
 
-      <jmv33-table-general :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove">
+      <jmv33-table-general ref="table" :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove">
 
         <template v-slot:cell(type)="data">
           <span v-if="data.item.type === 0">系统标签</span>
@@ -66,13 +99,20 @@ export default {
         ,filters:{
           filter: '',
           filterOn: "name",
-        },
-
-        request:{
-
         }
+      },
 
+      //MODAL数据
+      modal_data:{
+        title: '标签管理'
+        ,reqType:"insert"
+        ,insert:this.$rts.insert_tag
+        ,update:this.$rts.update_tag
+        ,remove:this.$rts.remove_tag
+        ,request:{
+        }
       }
+
     }
   },
 
@@ -83,15 +123,28 @@ export default {
     },
 
     onInsert(){
+      this.modal_data.reqType = "insert"
 
+      this.modal_data.request = {}
+      this.$refs.modal.load();
     },
 
     onUpdate(val){
 
+      this.modal_data.reqType = "update"
+      this.modal_data.request = val.item;
+      this.$refs.modal.load();
     },
 
     onRemove(val){
 
+      this.modal_data.reqType = "remove"
+
+      this.modal_data.request = {
+        id: val.item.id
+      }
+
+      this.$refs.modal.commitQuestion("你确定要删除标签吗?");
     }
 
 

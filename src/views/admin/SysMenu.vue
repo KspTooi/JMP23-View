@@ -254,15 +254,7 @@ export default{
         menuId: nvar.item.menuId
       }
 
-      this.$swal.fire({
-        title: "你确定要删除菜单吗?",
-        showCancelButton: true,
-        icon:"question"
-      }).then((ret) => {
-        if(ret.isConfirmed){
-          this.$refs.modal.commit();
-        }
-      })
+      this.$refs.modal.commitQuestion("你确定要删除菜单吗?");
     }
 
 

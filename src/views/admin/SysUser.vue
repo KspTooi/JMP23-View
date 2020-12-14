@@ -213,15 +213,7 @@ export default {
         userId: nvar.item.userId
       }
 
-      this.$swal.fire({
-        title: "你确定要删除用户吗?",
-        showCancelButton: true,
-        icon:"question"
-      }).then((ret) => {
-        if(ret.isConfirmed){
-          this.$refs.modal.commit();
-        }
-      })
+      this.$refs.modal.commitQuestion("你确定要删除用户吗?");
 
     }
 

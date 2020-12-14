@@ -101,6 +101,20 @@ export default {
       this.$bvModal.show("modal");
     }*/
 
+    ,commitQuestion(question){
+
+      this.$swal.fire({
+        title: question,
+        showCancelButton: true,
+        icon:"question"
+      }).then((ret) => {
+        if(ret.isConfirmed){
+          this.commit();
+        }
+      })
+
+    }
+
     ,commit(){
       this.modal_request();
     }

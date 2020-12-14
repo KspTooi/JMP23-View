@@ -52,6 +52,12 @@ export default {
 
     ,list_tag:server + "/admin/v1/tag/list"
 
+    ,insert_tag:server + "/admin/v1/tag/insert"
+
+    ,update_tag:server + "/admin/v1/tag/update"
+
+    ,remove_tag:server + "/admin/v1/tag/remove"
+
 
 
     ,post(url,data) {

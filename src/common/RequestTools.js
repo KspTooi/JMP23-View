@@ -30,6 +30,11 @@ export default {
 
     ,code_error:500
 
+
+    ,get_file_image:server + "/"
+
+    ,insert_file_upload:server + "/admin/v1/files/insert"
+
     ,admin_account_login:server + "/admin/v1/login"
 
     ,admin_account_logout:server + "/admin/v1/logout"
@@ -57,6 +62,25 @@ export default {
     ,update_tag:server + "/admin/v1/tag/update"
 
     ,remove_tag:server + "/admin/v1/tag/remove"
+
+
+    ,list_article:server + "/admin/v1/article/list"
+
+    ,insert_article:server + "/admin/v1/article/insert"
+
+    ,update_article:server + "/admin/v1/article/update"
+
+    ,remove_article:server + "/admin/v1/article/remove"
+
+
+    ,list_brand:server + "/admin/v1/brand/list"
+
+    ,insert_brand:server + "/admin/v1/brand/insert"
+
+    ,update_brand:server + "/admin/v1/brand/update"
+
+    ,remove_brand:server + "/admin/v1/brand/remove"
+
 
 
 

@@ -39,14 +39,48 @@ import navSideLeft from "@/components/general/jmp23-nav-side-left"
 import contentMain from "@/components/general/jmp23-content-main"
 import tableHead from "@/components/table/jmp23-table-head"
 import centerCard from "@/components/general/jmp23-center-card"
+import jmp32Editor from "@/components/general/jmp32-editor"
 
 
+
+//TinyMce框架
+import tinymce from '@tinymce/tinymce-vue'
+import tinymce1 from 'tinymce'
+import 'tinymce/skins/ui/oxide/skin.css'
+import 'tinymce/icons/default/icons'
+import 'tinymce/themes/silver'
+import 'tinymce/plugins/advlist'
+import 'tinymce/plugins/autolink'
+import 'tinymce/plugins/lists'
+import 'tinymce/plugins/link'
+import 'tinymce/plugins/image'
+import 'tinymce/plugins/charmap'
+import 'tinymce/plugins/print'
+import 'tinymce/plugins/preview'
+import 'tinymce/plugins/anchor'
+import 'tinymce/plugins/searchreplace'
+import 'tinymce/plugins/visualblocks'
+import 'tinymce/plugins/code'
+import 'tinymce/plugins/fullscreen'
+import 'tinymce/plugins/insertdatetime'
+import 'tinymce/plugins/media'
+import 'tinymce/plugins/table'
+import 'tinymce/plugins/paste'
+import 'tinymce/plugins/code'
+import 'tinymce/plugins/help'
+import 'tinymce/plugins/wordcount'
 
 //JMV33通用表格
 import jmv33TableGeneral from "@/components/jmv33-components/table/jmv33-table-general"
 
 //JMV33通用模态框
 import jmv33Modal from "@/components/jmv33-components/modal/jmv33-modal"
+
+
+//富文本编辑器
+Vue.component("editor",tinymce)
+Vue.component("jmp32-editor",jmp32Editor)
+
 
 //JMV33 带网络请求的select
 import jmv33SelectGeneral from "@/components/jmv33-components/table/jmv33-table-general"
@@ -79,6 +113,7 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$url = requestTools;
 Vue.prototype.$rts = requestTools;
 Vue.prototype.$tf = tableFields;
+Vue.prototype.$tinymce = tinymce1;
 
 
 /*整合ElementUI框架*/

@@ -46,7 +46,7 @@ export default {
   name: "jmp23-center-card",
 
   props:{
-    title:Object
+    title:null
   }
 
 }

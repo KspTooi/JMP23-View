@@ -53,6 +53,16 @@ const routes = [
                 name: 'sysTag',
                 component: () => import("@/views/admin/SysTag")
             }
+            ,{
+                path: 'article',
+                name: 'article',
+                component: () => import("@/views/admin/Article")
+            }
+            ,{
+                path: 'brand',
+                name: 'brand',
+                component: () => import("@/views/admin/Brand")
+            }
         ]
     }
 

@@ -48,6 +48,14 @@
             <i class="el-icon-menu"/>标签管理
           </el-menu-item>
 
+          <el-menu-item index="/admin/article">
+            <i class="el-icon-menu"/>资讯管理
+          </el-menu-item>
+
+          <el-menu-item index="/admin/brand">
+            <i class="el-icon-menu"/>品牌管理
+          </el-menu-item>
+
         </el-menu-item-group>
 
 

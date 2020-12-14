@@ -1,5 +1,8 @@
 <template>
 
+
+
+
   <div id="app">
 
 <!--    <div id="nav">
@@ -7,11 +10,34 @@
       <router-link to="/about">About</router-link>
     </div>-->
 
+
+
     <router-view/>
+
+
 
   </div>
 
 </template>
+
+<script>
+
+import Editor from '@tinymce/tinymce-vue'
+
+export default {
+
+  components: {
+    'editor': Editor
+  },
+
+  data(){
+    return {
+    }
+  }
+
+}
+
+</script>
 
 <!--<style lang="less">
 #app {

@@ -12,6 +12,7 @@
       </b-select-option>
 
     </b-select>
+
   </div>
 
 
@@ -43,7 +44,7 @@ export default {
   ,data(){
     return{
 
-      //总数居(通过调用接口获取)
+      //总数据(通过调用接口获取)
       select_data:null,
 
       //当前选择的值

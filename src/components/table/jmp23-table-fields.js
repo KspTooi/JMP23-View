@@ -88,6 +88,32 @@ export default {
             ,label:"操作"
         }
     ]
+    ,fields_article:[
+        {
+            key:"title"
+            ,label:"资讯标题"
+        },
+        {
+            key:"source"
+            ,label:"来源"
+        },
+        {
+            key:"author"
+            ,label:"作者"
+        },
+        {
+            key:"summary"
+            ,label:"摘要"
+        },
+        {
+            key:"coverPic"
+            ,label:"主图"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
 
 
 

@@ -1,6 +1,6 @@
 <template>
 
-  <b-modal id="modal" :title="modal_data.title" centered hide-footer>
+  <b-modal id="modal" :title="modal_data.title" centered hide-footer static lazy>
 
     <b-form @submit.prevent="modal_request">
 
@@ -14,6 +14,7 @@
           <span style="margin: 0 10px"></span>
           <b-btn variant="danger" @click="$bvModal.hide('modal')">取消</b-btn>
         </b-col>
+
 
       </b-row>
 
@@ -53,6 +54,7 @@ export default {
   ,data(){
     return{
 
+
       modal_data:{
 
         title:this.jmv33_modal_data.title
@@ -60,7 +62,6 @@ export default {
         ,insert:this.jmv33_modal_data.insert
         ,update:this.jmv33_modal_data.update
         ,remove:this.jmv33_modal_data.remove
-
         ,request:this.jmv33_modal_data.request
 
       }
@@ -77,6 +78,18 @@ export default {
         this.modal_data.request = nvar.request;
       }
     }
+
+  }
+
+  ,mounted() {
+
+    this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+      this.$emit("onModalCreate");
+    })
+
+    this.$root.$on('bv::modal::hide', (bvEvent, modalId) => {
+      this.$emit("onModalClose");
+    })
 
   }
 
@@ -113,6 +126,10 @@ export default {
         }
       })
 
+    }
+
+    ,aaa(){
+     console.log(123)
     }
 
     ,commit(){

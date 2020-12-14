@@ -94,7 +94,6 @@ Vue.use(VueSweetalert2);
 
 router.beforeEach((to, from, next) => {
 
-
     if(to.path === "/logout"){
         console.log("用户登出!");
         sessionStorage.clear();

@@ -3,6 +3,7 @@
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
     <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()">
+
       <template v-slot:modal_content="data">
 
         <b-row style="margin: 1rem 3rem">

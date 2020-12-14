@@ -15,7 +15,7 @@
           </b-col>
 
           <b-col sm="8">
-            <jmv33-select :url="$rts.list_menu" :payload="{parentId:0}" field_value="menuId" field_text="name" v-model="modal_data.request.parentId" show-zero-value="true"/>
+            <jmv33-select :url="$rts.list_menu" :payload="parentSelectRequestPayload" field_value="menuId" field_text="name" v-model="modal_data.request.parentId" show-zero-value="true"/>
           </b-col>
 
         </b-row>
@@ -63,7 +63,13 @@
           </b-col>
 
           <b-col sm="8">
-            <b-form-input size="sm" v-model="modal_data.request.type" required></b-form-input>
+
+            <b-select size="sm" v-model="modal_data.request.type" required @change="menuTypeChange">
+              <b-select-option value=0 >目录</b-select-option>
+              <b-select-option value=1 >菜单</b-select-option>
+              <b-select-option value=2 >按钮</b-select-option>
+            </b-select>
+
           </b-col>
 
         </b-row>
@@ -185,6 +191,8 @@ export default{
 
       select:{},
 
+      parentSelectRequestPayload:{},
+
       table_data:{
 
         url: this.$rts.list_menu
@@ -222,6 +230,20 @@ export default{
 
   ,methods:{
 
+    menuTypeChange(val){
+
+      let request = {
+        type:val - 1
+      }
+
+      if(val === 0){
+        request.type = 0;
+      }
+
+      this.parentSelectRequestPayload = request;
+
+    },
+
 
     onSelectByParentId(val){
       this.modal_data.request.parentId = val;
@@ -241,7 +263,19 @@ export default{
     }
 
     ,onUpdate(nvar){
+
       this.modal_data.reqType="update";
+
+      console.log(nvar)
+
+      this.parentSelectRequestPayload = {
+        type:nvar.item.type - 1
+      }
+
+      if(nvar.item.type===0){
+        this.parentSelectRequestPayload.type = 0;
+      }
+
       this.modal_data.request = nvar.item;
       this.$refs.modal.load();
     }

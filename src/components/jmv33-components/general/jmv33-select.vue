@@ -57,6 +57,11 @@ export default {
       handler(val){
         this.$emit('input',val);
       }
+    },
+    payload:{
+      handler(val){
+        this.refresh();
+      }
     }
   }
 

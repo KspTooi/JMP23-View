@@ -145,6 +145,7 @@ export default {
 
         if(ret.data.code === this.$url.code_success){
           this.$swal.fire(ret.data.msg,"","success");
+
           this.$bvModal.hide("modal");
 
           this.$emit("done")

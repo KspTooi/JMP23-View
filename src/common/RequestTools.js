@@ -50,6 +50,8 @@ export default {
 
     ,remove_menu:server + "/admin/v1/menu/remove"
 
+    ,list_tag:server + "/admin/v1/tag/list"
+
 
 
     ,post(url,data) {

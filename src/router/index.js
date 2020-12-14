@@ -43,6 +43,16 @@ const routes = [
                 name: 'sysMenu',
                 component: () => import("@/views/admin/SysMenu")
             }
+            ,{
+                path: 'sysSql',
+                name: 'sysSql',
+                component: () => import("@/views/admin/SysSql")
+            }
+            ,{
+                path: 'sysTag',
+                name: 'sysTag',
+                component: () => import("@/views/admin/SysTag")
+            }
         ]
     }
 

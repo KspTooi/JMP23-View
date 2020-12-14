@@ -38,6 +38,7 @@ import navTop from "@/components/general/jmp23-nav-top"
 import navSideLeft from "@/components/general/jmp23-nav-side-left"
 import contentMain from "@/components/general/jmp23-content-main"
 import tableHead from "@/components/table/jmp23-table-head"
+import centerCard from "@/components/general/jmp23-center-card"
 
 
 
@@ -56,6 +57,7 @@ Vue.component("jmp23-nav-top",navTop)
 Vue.component("jmp23-nav-side-left",navSideLeft)
 Vue.component("jmp23-content-main",contentMain)
 Vue.component("jmp23-table-head",tableHead)
+Vue.component("jmp23-center-card",centerCard)
 
 
 

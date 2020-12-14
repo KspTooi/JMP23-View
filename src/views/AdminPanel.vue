@@ -6,7 +6,7 @@
 
 
 
-    <jmp23-nav-side-left v-model="data"/>
+    <jmp23-nav-side-left/>
 
 
     <el-container>

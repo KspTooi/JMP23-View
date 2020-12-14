@@ -40,8 +40,12 @@
             <i class="el-icon-menu"/>菜单管理
           </el-menu-item>
 
-          <el-menu-item index="3-3">
-            <i class="el-icon-menu"/>菜单管理
+          <el-menu-item index="/admin/sysSql">
+            <i class="el-icon-menu"/>SQL监控
+          </el-menu-item>
+
+          <el-menu-item index="/admin/sysTag">
+            <i class="el-icon-menu"/>标签管理
           </el-menu-item>
 
         </el-menu-item-group>
@@ -55,20 +59,19 @@
           <i class="el-icon-cpu"></i>不可用的操作
         </template>
 
-        <el-submenu :index="item.menuId" v-for="item of nav_data" v-if="item.parentId===0">
+        <el-submenu :index="''+item.menuId" v-for="(item,i1) of nav_data" v-if="item.parentId===0" :key="i1">
 
           <template slot="title">
             <i class="el-icon-cpu"></i>{{item.name}}
           </template>
 
-          <el-menu-item :index="item2.url" v-for="item2 of nav_data" v-if="item2.parentId===item.menuId">
+          <el-menu-item :index="item2.url" v-for="(item2,i2) of nav_data" v-if="item2.parentId===item.menuId" :key="i2">
             <i class="el-icon-menu"/>{{item2.name}}
           </el-menu-item>
 
         </el-submenu>
 
       </el-submenu>
-
 
 
 
@@ -84,38 +87,19 @@
 
 <script>
 export default {
+
   name: "jmp23-nav-side-left",
 
 
-  props:{
-    value:Object
-  }
-
-  ,data(){
+  data(){
     return{
-
       nav_data:{
 
       }
-
-
     }
   },
 
-  watch:{
-
-    nav_data:{
-      deep:true,
-      handler(val){
-        this.$emit("input",val);
-      }
-    }
-
-  }
-
-
-
-  ,mounted() {
+  mounted() {
 
 
     this.$axios.post(this.$rts.list_menu).then((ret)=>{

@@ -58,7 +58,26 @@ export default {
   name: "jmv33-table-general",
 
   props:{
-    jmv33_table_data:Object
+    jmv33_table_data:{
+      type:Object,
+      default:()=>{
+        return{
+          table_data:{
+
+            url: ""
+            ,fields: ""
+
+            //暴露参数(过滤器)
+            ,filters:{
+              filter: "",
+              filterOn: "",
+            }
+
+          }
+
+        }
+      }
+    }
   },
 
   watch:{
@@ -67,8 +86,12 @@ export default {
 
       deep:true
       ,handler(nvar){
-        this.table_data.filters.filter = nvar.filters.filter;
-        this.table_data.filters.filterOn = nvar.filters.filterOn;
+
+        if(nvar.filters!=null){
+          this.table_data.filters.filter = nvar.filters.filter;
+          this.table_data.filters.filterOn = nvar.filters.filterOn;
+        }
+
       }
 
     }

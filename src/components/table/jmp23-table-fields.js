@@ -57,4 +57,38 @@ export default {
         }
     ]
 
+    ,fields_tag:[
+        {
+            key:"id"
+            ,label:"标签ID"
+            ,sortable:true
+        },
+        {
+            key:"name"
+            ,label:"标签名称"
+        },
+/*        {
+            key:"isDeleted"
+            ,label:"是否删除"
+        },*/
+        {
+            key:"type"
+            ,label:"标签类型"
+        },
+        {
+            key:"createTime"
+            ,label:"创建时间"
+        },
+        {
+            key:"lastUpdateTime"
+            ,label:"最后更新"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
+
+
+
 }

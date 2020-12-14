@@ -117,6 +117,7 @@
             </template>
           </jmp23-table-head>
 
+
         </b-card-body>
 
       </b-card>
@@ -182,7 +183,7 @@ export default{
 
       parentOnly:false,
 
-
+      select:{},
 
       table_data:{
 

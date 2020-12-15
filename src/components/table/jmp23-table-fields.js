@@ -114,6 +114,32 @@ export default {
             ,label:"操作"
         }
     ]
+    ,fields_car_make:[
+        {
+            key:"brandName"
+            ,label:"品牌名称"
+        },
+        {
+            key:"logoUrl"
+            ,label:"LOGO"
+        },
+        {
+            key:"englishName"
+            ,label:"英文名"
+        },
+        {
+            key:"phone"
+            ,label:"联系人"
+        },
+        {
+            key:"website"
+            ,label:"网站"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
 
 
 

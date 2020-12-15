@@ -73,13 +73,13 @@ export default {
     ,remove_article:server + "/admin/v1/article/remove"
 
 
-    ,list_brand:server + "/admin/v1/brand/list"
+    ,list_make:server + "/admin/v1/make/list"
 
-    ,insert_brand:server + "/admin/v1/brand/insert"
+    ,insert_make:server + "/admin/v1/make/insert"
 
-    ,update_brand:server + "/admin/v1/brand/update"
+    ,update_make:server + "/admin/v1/make/update"
 
-    ,remove_brand:server + "/admin/v1/brand/remove"
+    ,remove_make:server + "/admin/v1/make/remove"
 
 
 

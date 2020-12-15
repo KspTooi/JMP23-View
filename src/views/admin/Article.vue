@@ -4,10 +4,9 @@
 
 
     <template v-slot:area-modal>
-      <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()" @onModalCreate="onModalCreate" @onModalClose="onModalClose">
+      <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()" >
 
         <template v-slot:modal_content>
-
 
           <b-row style="margin: 1rem 3rem">
 
@@ -75,20 +74,22 @@
           </b-row>
 
 
-          <editor style="z-index: 100"
+          <editor v-model="modal_data.request.content"
                   :init="{
-         height: 500,
-         menubar: false,
-         plugins: [
-           'advlist autolink lists link image charmap print preview anchor',
-           'searchreplace visualblocks code fullscreen',
-           'insertdatetime media table paste code help wordcount'
-         ],
-         toolbar:
-           'undo redo | formatselect | bold italic backcolor | \
-           alignleft aligncenter alignright alignjustify | \
-           bullist numlist outdent indent | removeformat | help'
-       }"
+            height: 300,
+            menubar: false,
+            language: 'zh_CN',
+            images_upload_handler: imageUploadHandler,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount image'
+                ],
+                toolbar:
+                'undo redo | formatselect | bold italic backcolor | \a\
+                lignleft aligncenter alignright alignjustify | \
+                bullist numlist outdent indent | removeformat | help | image' }"
+
           />
 
           <hr>
@@ -149,7 +150,6 @@ export default {
         ,update:this.$rts.update_article
         ,remove:this.$rts.remove_article
         ,request:{
-
         }
       },
 
@@ -169,6 +169,26 @@ export default {
   },
 
   methods:{
+
+
+    imageUploadHandler(blobInfo, success, failure){
+
+      let formdata = new FormData();
+
+      formdata.append('files',blobInfo.blob())
+
+      this.$axios.post(this.$rts.insert_file_upload,formdata).then((ret)=>{
+
+        if(ret.data.code === 200){
+          success(this.$rts.get_file_image+ret.data.payload[0]);
+          return true;
+        }
+
+        failure('上传失败!');
+
+      })
+    },
+
 
 
     //文件上传成功
@@ -197,6 +217,7 @@ export default {
 
       this.changeCoverImg = true;
       this.modal_data.reqType="insert"
+      this.modal_data.request = {};
 
       this.$refs.modal.load();
 

@@ -1,6 +1,6 @@
 <template>
 
-  <b-modal id="modal" :title="modal_data.title" centered hide-footer static lazy>
+  <b-modal id="modal" :title="modal_data.title" centered hide-footer  no-enforce-focus>
 
     <b-form @submit.prevent="modal_request">
 

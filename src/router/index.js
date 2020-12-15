@@ -59,9 +59,9 @@ const routes = [
                 component: () => import("@/views/admin/Article")
             }
             ,{
-                path: 'brand',
-                name: 'brand',
-                component: () => import("@/views/admin/Brand")
+                path: 'carMake',
+                name: 'carMake',
+                component: () => import("@/views/admin/CarMake")
             }
         ]
     }

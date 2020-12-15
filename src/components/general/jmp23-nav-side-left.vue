@@ -52,7 +52,7 @@
             <i class="el-icon-menu"/>资讯管理
           </el-menu-item>
 
-          <el-menu-item index="/admin/brand">
+          <el-menu-item index="/admin/carMake">
             <i class="el-icon-menu"/>品牌管理
           </el-menu-item>
 
@@ -62,12 +62,30 @@
       </el-submenu>
 
 
+
+
       <el-submenu index="200">
+
         <template slot="title">
           <i class="el-icon-cpu"></i>不可用的操作
         </template>
 
-        <el-submenu :index="''+item.menuId" v-for="(item,i1) of nav_data" v-if="item.parentId===0" :key="i1">
+        <el-submenu v-for="(item1,i1) of nav_data" :key="i1" :index="i1+1" v-if="item1.parentId===0">
+
+          <template v-slot:title>
+            <i class="el-icon-cpu"></i>{{item1.name}}
+          </template>
+
+
+          <el-menu-item :index="item2.url" v-for="(item2,i2) of nav_data" v-if="item2.parentId === item1.menuId" >
+            <i class="el-icon-menu"/>{{item2.name}}
+          </el-menu-item>
+
+        </el-submenu>
+
+
+
+<!--        <el-submenu :index="''+item.menuId" v-for="(item,i1) of nav_data" v-if="item.parentId===0" :key="i1">
 
           <template slot="title">
             <i class="el-icon-cpu"></i>{{item.name}}
@@ -77,7 +95,7 @@
             <i class="el-icon-menu"/>{{item2.name}}
           </el-menu-item>
 
-        </el-submenu>
+        </el-submenu>-->
 
       </el-submenu>
 

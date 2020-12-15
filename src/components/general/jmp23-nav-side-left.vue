@@ -70,7 +70,7 @@
           <i class="el-icon-cpu"></i>不可用的操作
         </template>
 
-        <el-submenu v-for="(item1,i1) of nav_data" :key="i1" :index="i1+1" v-if="item1.parentId===0">
+<!--        <el-submenu v-for="(item1,i1) of nav_data" :key="i1" :index="i1+1" v-if="item1.parentId===0">
 
           <template v-slot:title>
             <i class="el-icon-cpu"></i>{{item1.name}}
@@ -81,11 +81,11 @@
             <i class="el-icon-menu"/>{{item2.name}}
           </el-menu-item>
 
-        </el-submenu>
+        </el-submenu>-->
 
 
 
-<!--        <el-submenu :index="''+item.menuId" v-for="(item,i1) of nav_data" v-if="item.parentId===0" :key="i1">
+        <el-submenu :index="''+item.menuId" v-for="(item,i1) of nav_data" v-if="item.parentId===0" :key="i1">
 
           <template slot="title">
             <i class="el-icon-cpu"></i>{{item.name}}
@@ -95,7 +95,7 @@
             <i class="el-icon-menu"/>{{item2.name}}
           </el-menu-item>
 
-        </el-submenu>-->
+        </el-submenu>
 
       </el-submenu>
 

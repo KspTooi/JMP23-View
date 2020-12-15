@@ -123,7 +123,7 @@ export default {
             key:"logoUrl"
             ,label:"LOGO"
         },
-        {
+/*        {
             key:"englishName"
             ,label:"英文名"
         },
@@ -134,7 +134,7 @@ export default {
         {
             key:"website"
             ,label:"网站"
-        },
+        },*/
         {
             key:"options"
             ,label:"操作"

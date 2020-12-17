@@ -5,7 +5,17 @@
 
     <template v-slot:area-modal>
 
-      <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()">
+      <jmv43-modal ref="modal"
+                   title="品牌管理"
+                   :insert="$rts.insert_make"
+                   :update="$rts.update_make"
+                   :remove="$rts.remove_make"
+                   :req-type="modal_data.reqType"
+                   :request="modal_data.request"
+                   :request-done="()=>{$refs.table.commit()}"
+      >
+
+
 
         <template v-slot:modal_content>
 
@@ -47,7 +57,7 @@
 
         </template>
 
-      </jmv33-modal>
+      </jmv43-modal>
 
     </template>
 
@@ -112,15 +122,9 @@ export default {
       },
 
       modal_data:{
-
-        title: '品牌管理'
-        ,reqType:"insert"
-        ,insert:this.$rts.insert_make
-        ,update:this.$rts.update_make
-        ,remove:this.$rts.remove_make
+        reqType:"insert"
         ,request:{
         }
-
       }
     }
   },

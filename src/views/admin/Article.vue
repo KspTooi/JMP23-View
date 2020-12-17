@@ -5,7 +5,15 @@
 
     <template v-slot:area-modal>
 
-      <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()" >
+      <jmv43-modal ref="modal"
+                   title="资讯管理"
+                   :insert="$rts.insert_article"
+                   :update="$rts.update_article"
+                   :remove="$rts.remove_article"
+                   :req-type="modal_data.reqType"
+                   :request="modal_data.request"
+                   :request-done="()=>{$refs.table.commit()}"
+      >
 
         <template v-slot:modal_content>
 
@@ -98,7 +106,7 @@
         </template>
 
 
-      </jmv33-modal>
+      </jmv43-modal>
     </template>
 
 
@@ -158,11 +166,7 @@ export default {
       changeCoverImg:false,
 
       modal_data:{
-        title: '资讯管理'
-        ,reqType:"insert"
-        ,insert:this.$rts.insert_article
-        ,update:this.$rts.update_article
-        ,remove:this.$rts.remove_article
+        reqType:"insert"
         ,request:{
         }
       },

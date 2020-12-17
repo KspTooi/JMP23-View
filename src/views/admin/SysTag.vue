@@ -7,7 +7,15 @@
 
     <template v-slot:area-modal>
 
-      <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()">
+      <jmv43-modal ref="modal"
+                   title="标签管理"
+                   :insert="$rts.insert_tag"
+                   :update="$rts.update_tag"
+                   :remove="$rts.remove_tag"
+                   :req-type="modal_data.reqType"
+                   :request="modal_data.request"
+                   :request-done="()=>{$refs.table.commit()}"
+      >
 
         <template v-slot:modal_content>
           <b-row style="margin: 1rem 3rem">
@@ -40,7 +48,7 @@
           <hr>
         </template>
 
-      </jmv33-modal>
+      </jmv43-modal>
 
     </template>
 
@@ -111,12 +119,8 @@ export default {
 
       //MODAL数据
       modal_data:{
-        title: '标签管理'
-        ,reqType:"insert"
-        ,insert:this.$rts.insert_tag
-        ,update:this.$rts.update_tag
-        ,remove:this.$rts.remove_tag
-        ,request:{
+        reqType:"insert",
+        request:{
         }
       }
 

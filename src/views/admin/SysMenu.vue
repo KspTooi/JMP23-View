@@ -4,7 +4,15 @@
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
 
-    <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()">
+    <jmv43-modal ref="modal"
+                 title="菜单管理"
+                 :insert="$rts.insert_menu"
+                 :update="$rts.update_menu"
+                 :remove="$rts.remove_menu"
+                 :req-type="modal_data.reqType"
+                 :request="modal_data.request"
+                 :request-done="()=>{$refs.table.commit()}"
+    >
 
       <template v-slot:modal_content="data">
 
@@ -101,7 +109,7 @@
 
       </template>
 
-    </jmv33-modal>
+    </jmv43-modal>
 
 
     <template v-slot:header>
@@ -214,11 +222,7 @@ export default{
 
       ,modal_data:{
 
-        title: '菜单管理'
-        ,reqType:"insert"
-        ,insert:this.$rts.insert_menu
-        ,update:this.$rts.update_menu
-        ,remove:this.$rts.remove_menu
+        reqType:"insert"
 
         ,parents:{
 

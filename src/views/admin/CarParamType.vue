@@ -4,7 +4,16 @@
 
     <template v-slot:area-modal>
 
-      <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()" >
+      <jmv43-modal ref="modal"
+                   title="参数类型管理"
+                   :insert="$rts.insert_paramtype"
+                   :update="$rts.update_paramtype"
+                   :remove="$rts.remove_paramtype"
+                   :req-type="modal_data.reqType"
+                   :request="modal_data.request"
+                   :request-done="()=>{$refs.table.commit()}"
+      >
+
 
         <template v-slot:modal_content>
 
@@ -41,7 +50,7 @@
 
         </template>
 
-      </jmv33-modal>
+      </jmv43-modal>
 
     </template>
 
@@ -90,11 +99,7 @@ export default {
       },
 
       modal_data:{
-        title: '参数类型管理'
-        ,reqType:"insert"
-        ,insert:this.$rts.insert_paramtype
-        ,update:this.$rts.update_paramtype
-        ,remove:this.$rts.remove_paramtype
+        reqType:"insert"
         ,request:{
         }
       },

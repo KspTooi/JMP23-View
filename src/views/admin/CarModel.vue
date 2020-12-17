@@ -5,7 +5,15 @@
 
     <template v-slot:area-modal>
 
-      <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()" >
+      <jmv43-modal ref="modal"
+                   title="车系管理"
+                   :insert="$rts.insert_carmodel"
+                   :update="$rts.update_carmodel"
+                   :remove="$rts.remove_carmodel"
+                   :req-type="modal_data.reqType"
+                   :request="modal_data.request"
+                   :request-done="()=>{$refs.table.commit()}"
+      >
 
         <template v-slot:modal_content>
 
@@ -35,7 +43,7 @@
 
         </template>
 
-      </jmv33-modal>
+      </jmv43-modal>
 
     </template>
 
@@ -85,11 +93,7 @@ export default {
       },
 
       modal_data:{
-        title: '车系管理'
-        ,reqType:"insert"
-        ,insert:this.$rts.insert_carmodel
-        ,update:this.$rts.update_carmodel
-        ,remove:this.$rts.remove_carmodel
+        reqType:"insert"
         ,request:{
         }
       },

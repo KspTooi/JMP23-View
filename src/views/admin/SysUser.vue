@@ -3,10 +3,6 @@
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
 
-
-
-
-
     <jmv43-modal ref="modal"
                  title="用户管理"
                  :insert="$rts.insert_user"

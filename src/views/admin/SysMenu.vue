@@ -130,7 +130,14 @@
 
 
 
-      <jmv33-table-general ref="table" :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove">
+      <jmv33-table-general ref="table"
+                           :on-update="onUpdate"
+                           :on-remove="onRemove"
+                           :url="$rts.list_menu"
+                           :fields="$tf.fields_menu"
+                           :filter="table_data.filter"
+                           :filter-on="table_data.filterOn"
+      >
 
         <template v-slot:cell(perms)="data">
           <span v-if="data.item.perms === null">无需权限</span>
@@ -194,15 +201,8 @@ export default{
       parentSelectRequestPayload:{},
 
       table_data:{
-
-        url: this.$rts.list_menu
-        ,fields: this.$tf.fields_menu
-
-        ,filters:{
-          filter: null,
-          filterOn: ["name"],
-        }
-
+        filter: null,
+        filterOn: ["name"],
       }
 
       ,modal_data:{
@@ -250,7 +250,7 @@ export default{
     },
 
     onFilterChange(nvar){
-      this.table_data.filters.filter = nvar;
+      this.table_data.filter = nvar;
     }
 
     ,onRefresh(){

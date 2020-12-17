@@ -59,7 +59,14 @@
 
     <template v-slot:area-table>
 
-      <jmv33-table-general ref="table" :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove" >
+      <jmv33-table-general ref="table"
+                           :on-update="onUpdate"
+                           :on-remove="onRemove"
+                           :url="$rts.list_make"
+                           :fields="$tf.fields_car_make"
+                           :filter="table_data.filter"
+                           :filter-on="table_data.filterOn"
+      >
 
         <template v-slot:cell(logoUrl)="data">
 
@@ -92,18 +99,9 @@ export default {
         ,replace:false
       },
 
-
       table_data:{
-
-        url: this.$rts.list_make
-        ,fields: this.$tf.fields_car_make
-
-        //暴露参数(过滤器)
-        ,filters:{
-          filter: "",
-          filterOn: "brandName",
-        }
-
+        filter: "",
+        filterOn: ["brandName"],
       },
 
       modal_data:{

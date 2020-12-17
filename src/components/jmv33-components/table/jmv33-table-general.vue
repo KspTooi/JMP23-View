@@ -4,12 +4,12 @@
 
     <b-table id="my-table"
              :items="table_data.items"
-             :fields="table_data.fields"
+             :fields="fields"
              striped bordered hover head-variant="light" foot-variant="light"
              :per-page="table_data.perPage"
              :current-page="table_data.currentPage"
-             :filter=table_data.filters.filter
-             :filter-included-fields="table_data.fields.filterOn"
+             :filter=filter
+             :filter-included-fields="filterOn"
              sticky-header="400px"
              @filtered="onFiltered"
     >
@@ -23,13 +23,13 @@
 
       <template v-slot:cell(options)="data">
 
-        <b-btn variant="info" size="sm" @click="$emit('onUpdate',data)">
+        <b-btn variant="info" size="sm" @click="onUpdate(data)">
           <i class="el-icon-edit"></i>
         </b-btn>
 
         <span style="margin: 0 2px"></span>
 
-        <b-btn variant="danger" size="sm" @click="$emit('onRemove',data)">
+        <b-btn variant="danger" size="sm" @click="onRemove(data)">
           <i class="el-icon-delete"></i>
         </b-btn>
 
@@ -38,6 +38,7 @@
     </b-table>
 
 
+    {{table_data.filters}}
 
     <b-pagination
         v-model="table_data.currentPage"
@@ -56,32 +57,9 @@ export default {
 
   name: "jmv33-table-general",
 
-  props:{
-    jmv33_table_data:{
-      type:Object,
-      default:()=>{
-        return{
-          table_data:{
-
-            url: ""
-            ,fields: ""
-
-            //暴露参数(过滤器)
-            ,filters:{
-              filter: "",
-              filterOn: "",
-            }
-
-          }
-
-        }
-      }
-    }
-  },
-
   watch:{
 
-    jmv33_table_data:{
+/*    jmv33_table_data:{
 
       deep:true
       ,handler(nvar){
@@ -93,8 +71,46 @@ export default {
 
       }
 
-    }
+    }*/
 
+
+  },
+
+
+  props:{
+
+    url:{
+      type:String,
+      default:""
+    },
+    request:{
+      type:Object,
+      default:null
+    },
+    fields:{
+      type:Array,
+      default:{}
+    },
+    filter:{
+      type:String,
+      default:{}
+    },
+    filterOn:{
+      type:Array,
+      default:{}
+    },
+    onUpdate:{
+      type:Function,
+      default:null
+    },
+    onRemove:{
+      type:Function,
+      default:null
+    },
+    onFilterChange:{
+      type:Function,
+      default:null
+    },
 
   },
 
@@ -103,23 +119,13 @@ export default {
 
       table_data:{
 
-        url: this.jmv33_table_data.url
-        ,fields: this.jmv33_table_data.fields
-
-        ,currentPage:1
+        currentPage:1
         ,rows:0
         ,perPage:8
         ,items:[]
 
-        //暴露参数(过滤器)
-        ,filters:{
-          filter: this.jmv33_table_data.filters.filter,
-          filterOn: this.jmv33_table_data.filters.filter,
-        }
-
         //表格请求参数
-        ,request:[]
-
+/*        ,request:this.request*/
       }
 
     }
@@ -133,15 +139,17 @@ export default {
       this.refreshTable(request);
     }
 
+
     //过滤器数据重载
     ,onFiltered(filterItem){
       this.table_data.rows = filterItem.length;
     },
 
+
     //通过一个请求加载列数据
     refreshTable(request){
 
-      this.$axios.post(this.table_data.url,request).then((ret)=>{
+      this.$axios.post(this.url,request).then((ret)=>{
         this.table_data.items = ret.data.payload;
         this.table_data.rows = ret.data.payload.length;
       });

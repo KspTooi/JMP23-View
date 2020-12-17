@@ -54,7 +54,14 @@
 
     <template v-slot:area-table>
 
-      <jmv33-table-general ref="table" :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove">
+      <jmv33-table-general ref="table"
+                           :on-update="onUpdate"
+                           :on-remove="onRemove"
+                           :url="$rts.list_tag"
+                           :fields="$tf.fields_tag"
+                           :filter="table_data.filter"
+                           :filter-on="table_data.filterOn"
+      >
 
         <template v-slot:cell(type)="data">
           <span v-if="data.item.type === 0">系统标签</span>
@@ -92,14 +99,8 @@ export default {
     return{
       //表格数据
       table_data:{
-
-        url: this.$rts.list_tag
-        ,fields: this.$tf.fields_tag
-
-        ,filters:{
-          filter: '',
-          filterOn: "name",
-        }
+        filter: '',
+        filterOn: ["name"],
       },
 
       //MODAL数据
@@ -119,7 +120,7 @@ export default {
   methods:{
 
     onFilterChange(val){
-      this.table_data.filters.filter = val;
+      this.table_data.filter = val;
     },
 
     onInsert(){

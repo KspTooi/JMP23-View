@@ -54,7 +54,14 @@
 
     <template v-slot:area-table>
 
-      <jmv33-table-general ref="table" :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove">
+      <jmv33-table-general ref="table"
+                           :on-update="onUpdate"
+                           :on-remove="onRemove"
+                           :url="$rts.list_paramtype"
+                           :fields="$tf.fields_car_paramtype"
+                           :filter="table_data.filter"
+                           :filter-on="table_data.filterOn"
+      >
 
 
       </jmv33-table-general>
@@ -73,17 +80,10 @@ export default {
     return{
 
       table_data:{
-
-        url: this.$rts.list_paramtype
-        ,fields: this.$tf.fields_car_paramtype
-
-        //暴露参数(过滤器)
-        ,filters:{
-          filter: "",
-          filterOn: "title",
-        }
-
+        filter: "",
+        filterOn: ["title"],
       },
+
       modal_data:{
         title: '参数类型管理'
         ,reqType:"insert"
@@ -100,7 +100,7 @@ export default {
   methods:{
 
     onFilterChange(val){
-      this.table_data.filters.filter = val;
+      this.table_data.filter = val;
     },
 
     onInsert(val){

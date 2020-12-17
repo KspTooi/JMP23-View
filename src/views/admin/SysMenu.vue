@@ -16,95 +16,35 @@
 
       <template v-slot:modal_content="data">
 
-        <b-row style="margin: 1rem 3rem">
 
-          <b-col sm="4">
-            <label>父级菜单:</label>
-          </b-col>
+        <jmv43-modal-slot label="父级菜单:">
 
-          <b-col sm="8">
-            <jmv33-select :url="$rts.list_menu" :payload="parentSelectRequestPayload" field_value="menuId" field_text="name" v-model="modal_data.request.parentId" show-zero-value="true"/>
-          </b-col>
+          <jmv33-select :url="$rts.list_menu" :payload="parentSelectRequestPayload" field_value="menuId" field_text="name" v-model="modal_data.request.parentId" show-zero-value="true"/>
 
-        </b-row>
+        </jmv43-modal-slot>
 
-        <b-row style="margin: 1rem 3rem">
 
-          <b-col sm="4">
-            <label>菜单名:</label>
-          </b-col>
+        <jmv43-modal-input label="菜单名:" v-model="modal_data.request.name"/>
 
-          <b-col sm="8">
-            <b-form-input size="sm" v-model="modal_data.request.name" required></b-form-input>
-          </b-col>
+        <jmv43-modal-input label="菜单地址:" v-model="modal_data.request.url"/>
 
-        </b-row>
+        <jmv43-modal-input label="权限节点:" v-model="modal_data.request.perms"/>
 
-        <b-row style="margin: 1rem 3rem">
+        <jmv43-modal-slot label="菜单类型:">
 
-          <b-col sm="4">
-            <label>菜单地址:</label>
-          </b-col>
+          <b-select size="sm" v-model="modal_data.request.type" required @change="menuTypeChange">
+            <b-select-option value=0 >目录</b-select-option>
+            <b-select-option value=1 >菜单</b-select-option>
+            <b-select-option value=2 >按钮</b-select-option>
+          </b-select>
 
-          <b-col sm="8">
-            <b-form-input size="sm" v-model="modal_data.request.url"></b-form-input>
-          </b-col>
+        </jmv43-modal-slot>
 
-        </b-row>
+        <jmv43-modal-input label="菜单图标:" v-model="modal_data.request.icon"/>
 
-        <b-row style="margin: 1rem 3rem">
+        <jmv43-modal-input label="排序值:" v-model="modal_data.request.orderNum"/>
 
-          <b-col sm="4">
-            <label>权限节点:</label>
-          </b-col>
 
-          <b-col sm="8">
-            <b-form-input size="sm" v-model="modal_data.request.perms"></b-form-input>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="4">
-            <label>菜单类型:</label>
-          </b-col>
-
-          <b-col sm="8">
-
-            <b-select size="sm" v-model="modal_data.request.type" required @change="menuTypeChange">
-              <b-select-option value=0 >目录</b-select-option>
-              <b-select-option value=1 >菜单</b-select-option>
-              <b-select-option value=2 >按钮</b-select-option>
-            </b-select>
-
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="4">
-            <label>菜单图标:</label>
-          </b-col>
-
-          <b-col sm="8">
-            <b-form-input size="sm" v-model="modal_data.request.icon" required></b-form-input>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="4">
-            <label>排序值:</label>
-          </b-col>
-
-          <b-col sm="8">
-            <b-form-input size="sm" v-model="modal_data.request.orderNum" required></b-form-input>
-          </b-col>
-
-        </b-row>
 
 
       </template>
@@ -123,6 +63,7 @@
         <hr>
         <b-card-body>
 
+          <jmv43-status-formatter/>
 
           <jmp23-table-head insert-btn-text="新增菜单"
                             placeholder="按菜单名搜索"
@@ -156,14 +97,24 @@
       >
 
         <template v-slot:cell(perms)="data">
+
           <span v-if="data.item.perms === null">无需权限</span>
           {{data.item.perms}}
+
         </template>
 
+
         <template v-slot:cell(type)="data">
-          <span v-if="data.item.type === 0"><b-btn variant="primary">目录</b-btn></span>
+
+
+          <jmv43-status-formatter :value="data.item.type"
+                                  :condition="{0:'目录',1:'菜单',2:'按钮'}"
+                                  :btn="{0:'primary',1:'success',2:'danger'}"
+          />
+
+<!--          <span v-if="data.item.type === 0"><b-btn variant="primary">目录</b-btn></span>
           <span v-if="data.item.type === 1"><b-btn variant="success">菜单</b-btn></span>
-          <span v-if="data.item.type === 2"><b-btn variant="danger">按钮</b-btn></span>
+          <span v-if="data.item.type === 2"><b-btn variant="danger">按钮</b-btn></span>-->
         </template>
 
       </jmv33-table-general>
@@ -181,11 +132,12 @@
 
 
 import Jmv33Select from "@/components/jmv33-components/general/jmv33-select";
+import Jmv43StatusFormatter from "@/components/jmv33-components/general/jmv43-status-formatter";
 export default{
 
   name: "Login",
 
-  components: {Jmv33Select},
+  components: {Jmv43StatusFormatter, Jmv33Select},
   watch:{
 
     parentOnly:{
@@ -269,6 +221,7 @@ export default{
     }
 
     ,onInsert(){
+      this.modal_data.reqType="insert";
       this.modal_data.request = {}
       this.$refs.modal.load();
     }

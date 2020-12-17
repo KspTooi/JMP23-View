@@ -80,6 +80,13 @@ import jmv43Modal from "@/components/jmv33-components/modal/jmv43-modal"
 //JM43下拉列表框
 import jmv43Select from "@/components/jmv33-components/general/jmv43-select"
 
+//JMV43通用格式化器
+import jmv43statusFormatter from "@/components/jmv33-components/general/jmv43-status-formatter"
+
+//JMV43模态槽位
+import jmv43ModalSlot from "@/components/jmv33-components/modal/jmv43-modal-slot"
+import jmv43ModalInput from "@/components/jmv33-components/modal/jmv43-modal-input"
+
 //JM33通用文件上传
 import jmv33FileUpload from "@/components/jmv33-components/general/jmv33-files-upload"
 
@@ -108,6 +115,9 @@ Vue.component("jmv33-modal",jmv33Modal)
 Vue.component("jmv33-file-upload",jmv33FileUpload)
 Vue.component("jmv43-modal",jmv43Modal)
 Vue.component("jmv43-select",jmv43Select)
+Vue.component("jmv43-status-formatter",jmv43statusFormatter)
+Vue.component("jmv43-modal-slot",jmv43ModalSlot)
+Vue.component("jmv43-modal-input",jmv43ModalInput)
 
 
 

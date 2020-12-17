@@ -30,15 +30,29 @@ export default {
       }
     },
 
-    url:null,
-    payload:null,
-    field_value:null,
-    field_text:null,
+    url:{
+      type:String,
+      default:""
+    },
+    request:{
+      type:String,
+      default:""
+    },
+    field_value:{
+      type:String,
+      default:""
+    },
+    field_text:{
+      type:String,
+      default:""
+    },
+
     showZeroValue:{
       default:()=>{
         return false;
       }
     }
+
   },
 
   name: "jmv33-select"

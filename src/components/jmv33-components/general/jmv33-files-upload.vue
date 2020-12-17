@@ -20,54 +20,61 @@
 </template>
 
 <script>
+
 export default {
 
   name: "jmv33-files-upload",
 
   props:{
-    jmv33_files_upload_data:{
-      type:Object,
-      default:()=>{
-        return{
-          url:""
-          ,imgUrl:""
-          ,limit:1
-          ,field:"files"
-          ,replace:false
-        }
-      }
+
+    onSuccess:{
+      type:Function,
+      default:null
+    },
+
+    url:{
+      type:String,
+      default:""
+    },
+
+    show:{
+      type:String,
+      default:""
+    },
+
+    limit:{
+      type:Number,
+      default:1
+    },
+
+    field:{
+      type:String,
+      default:'file'
+    },
+
+    replace:{
+      type:Boolean,
+      default:false
     }
+
   },
   data(){
     return{
       file_upload_data:{
-        url:this.jmv33_files_upload_data.url
-        ,imgUrl:this.jmv33_files_upload_data.imgUrl
-        ,limit:this.jmv33_files_upload_data.limit
-        ,field:this.jmv33_files_upload_data.field
-        ,replace:this.jmv33_files_upload_data.replace
+        url:this.url
+        ,imgUrl:this.show
+        ,limit:this.limit
+        ,field:this.field
+        ,replace:this.replace
       }
     }
   },
 
-  watch:{
-
-    jmv33_files_upload_data:{
-      deep:true,
-      immediate: true,
-      handler(val){
-        this.file_upload_data.imgUrl = val.imgUrl;
-        this.file_upload_data.replace = val.replace;
-      }
-    },
-
-  },
-
   methods:{
 
-    //上传成功
+    //上传成功的回调方法
     onUploadSuccess(ret, file, fileList){
-      this.$emit("onUploadSuccess",ret,file,fileList);
+      this.onSuccess(ret, file, fileList);
     }
 
 

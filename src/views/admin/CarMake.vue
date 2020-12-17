@@ -30,64 +30,20 @@
 
             <b-col sm="8">
 
-              <jmv33-files-upload :jmv33_files_upload_data="file_upload_data" @onUploadSuccess="onUploadSuccess"/>
+<!--              <jmv33-files-upload :jmv33_files_upload_data="file_upload_data" :on-success="onUploadSuccess"/>-->
 
-<!--              <img :src="$rts.get_file_image+'/'+modal_data.request.logoUrl" style="width: 80px" alt="暂无图片" v-if="!changeCoverImg">
+              <jmv33-files-upload :url="$rts.insert_file_upload"
+                                  field="files"
+                                  :limit='1'
+                                  :replace="file_upload_data.replace"
+                                  :show="file_upload_data.imgUrl"
+                                  :on-success="onUploadSuccess"/>
 
-              <b-btn size="sm" variant="success" @click="changeCoverImg=true" v-if="!changeCoverImg" style="margin-left: 20px">更换图片</b-btn>
-
-              <el-upload v-if="changeCoverImg"
-                         :action="$rts.insert_file_upload"
-                         :multiple=false
-                         :limit=1
-                         name="files"
-                         list-type="picture"
-                         :on-success="fileUploadSuccess"
-              >
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-              </el-upload>-->
             </b-col>
 
           </b-row>
 
           <hr>
-
-<!--          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>品牌英文名:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.englishName" required></b-form-input>
-            </b-col>
-
-          </b-row>
-
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>联系方式:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.phone" required></b-form-input>
-            </b-col>
-
-          </b-row>
-
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>网站:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.website" required></b-form-input>
-            </b-col>
-
-          </b-row>-->
 
         </template>
 
@@ -131,13 +87,8 @@ export default {
     return{
 
 
-      changeCoverImg:false,
-
       file_upload_data:{
-        url:this.$rts.insert_file_upload
-        ,imgUrl:""
-        ,limit:1
-        ,field:"files"
+        imgUrl:""
         ,replace:false
       },
 
@@ -193,9 +144,10 @@ export default {
     onInsert(){
 
       this.modal_data.reqType = "insert";
-      this.changeCoverImg = true;
 
       this.file_upload_data.replace=true;
+
+      this.modal_data.request={}
 
       this.$refs.modal.load();
 
@@ -204,11 +156,11 @@ export default {
     onUpdate(val){
 
       this.modal_data.reqType = "update";
-      this.changeCoverImg = false;
 
       this.modal_data.request = val.item;
 
       this.file_upload_data.imgUrl = this.$rts.get_file_image+val.item.logoUrl;
+
       this.file_upload_data.replace=false;
 
       this.$refs.modal.load();

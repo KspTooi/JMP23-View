@@ -124,8 +124,8 @@
         <b-card-body>
 
 
-          <jmp23-table-head insert-btn-text="按菜单名搜索"
-                            placeholder="新增菜单"
+          <jmp23-table-head insert-btn-text="新增菜单"
+                            placeholder="按菜单名搜索"
                             :on-insert="onInsert"
                             :on-refresh="()=>{$refs.table.commit()}"
                             :on-filter-change="onFilterChange">

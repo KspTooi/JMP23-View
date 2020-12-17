@@ -77,8 +77,6 @@ export default {
       this.onSuccess(ret, file, fileList);
     }
 
-
-
   }
 
 

@@ -18,32 +18,12 @@
       >
 
         <template v-slot:modal_content>
-          <b-row style="margin: 1rem 3rem">
 
-            <b-col sm="4">
-              <label>标签名:</label>
-            </b-col>
 
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.name" required></b-form-input>
-            </b-col>
+          <jmv43-modal-input label="标签名:" v-model="modal_data.request.name" />
 
-          </b-row>
+          <jmv43-modal-input label="标签类型:" v-model="modal_data.request.type" />
 
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>标签类型:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-select v-model="modal_data.request.type" size="sm">
-                <b-select-option value="0">系统标签</b-select-option>
-                <b-select-option value="1">用户标签</b-select-option>
-              </b-select>
-            </b-col>
-
-          </b-row>
 
           <hr>
         </template>

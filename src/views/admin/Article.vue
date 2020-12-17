@@ -17,70 +17,26 @@
 
         <template v-slot:modal_content>
 
-          <b-row style="margin: 1rem 3rem">
 
-            <b-col sm="4">
-              <label>标题:</label>
-            </b-col>
+          <jmv43-modal-input label="标题:" v-model="modal_data.request.title"/>
 
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.title" required></b-form-input>
-            </b-col>
+          <jmv43-modal-input label="来源:" v-model="modal_data.request.source"/>
 
-          </b-row>
-
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>来源:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.source" required></b-form-input>
-            </b-col>
-
-          </b-row>
-
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>摘要:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.summary" required></b-form-input>
-            </b-col>
-
-          </b-row>
-
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>主图:</label>
-            </b-col>
+          <jmv43-modal-input label="摘要:" v-model="modal_data.request.summary"/>
 
 
-            <b-col sm="8">
+          <jmv43-modal-slot label="主图">
 
-              <img :src="$rts.get_file_image+'/'+modal_data.request.coverPic" style="width: 80px" alt="暂无图片" v-if="!changeCoverImg">
+            <jmv33-files-upload
+                :url="$rts.insert_file_upload"
+                :show="$rts.get_file_image+'/'+modal_data.request.coverPic"
+                :replace="changeCoverImg"
+                :limit="1"
+                field="files"
+                :on-success="fileUploadSuccess"
+            />
 
-              <b-btn size="sm" variant="success" @click="changeCoverImg=true" v-if="!changeCoverImg" style="margin-left: 20px">更换图片</b-btn>
-
-              <el-upload v-if="changeCoverImg"
-                  :action="$rts.insert_file_upload"
-                  :file-list="fileList"
-                  :multiple=false
-                  :limit=1
-                  name="files"
-                  list-type="picture"
-                  :on-success="fileUploadSuccess"
-              >
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-              </el-upload>
-            </b-col>
-
-          </b-row>
+          </jmv43-modal-slot>
 
 
           <editor v-model="modal_data.request.content"
@@ -107,6 +63,7 @@
 
 
       </jmv43-modal>
+
     </template>
 
 
@@ -151,9 +108,10 @@
 </template>
 
 <script>
+import Jmv33FilesUpload from "@/components/jmv33-components/general/jmv33-files-upload";
 export default {
   name: "Article",
-
+  components: {Jmv33FilesUpload},
   data(){
     return{
 

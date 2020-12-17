@@ -17,18 +17,8 @@
 
         <template v-slot:modal_content>
 
-          <b-row style="margin: 1rem 3rem">
 
-            <b-col sm="4">
-              <label>厂商名称:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.manufacturerName" required></b-form-input>
-            </b-col>
-
-          </b-row>
-
+          <jmv43-modal-input label="厂商名称:" v-model="modal_data.request.manufacturerName" ></jmv43-modal-input>
 
         </template>
 

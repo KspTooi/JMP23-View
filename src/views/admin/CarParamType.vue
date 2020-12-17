@@ -18,35 +18,16 @@
         <template v-slot:modal_content>
 
 
-          <b-row style="margin: 1rem 3rem">
+          <jmv43-modal-input label="参数名称:" v-model="modal_data.request.typeName" />
 
-            <b-col sm="4">
-              <label>参数名称:</label>
-            </b-col>
+          <jmv43-modal-slot label="是否启用:">
 
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.typeName" required></b-form-input>
-            </b-col>
+            <b-select v-model="modal_data.request.state" required size="sm">
+              <b-select-option value="1">有效</b-select-option>
+              <b-select-option value="0">无效</b-select-option>
+            </b-select>
 
-          </b-row>
-
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>是否启用:</label>
-            </b-col>
-
-            <b-col sm="8">
-
-              <b-select v-model="modal_data.request.state" required size="sm">
-                <b-select-option value="1">有效</b-select-option>
-                <b-select-option value="0">无效</b-select-option>
-              </b-select>
-
-            </b-col>
-
-          </b-row>
-
+          </jmv43-modal-slot>
 
         </template>
 

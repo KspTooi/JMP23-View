@@ -17,41 +17,23 @@
 
 
 
+
         <template v-slot:modal_content>
 
-          <b-row style="margin: 1rem 3rem">
 
-            <b-col sm="4">
-              <label>品牌名称:</label>
-            </b-col>
+          <jmv43-modal-input label="品牌名称:" v-model="modal_data.request.brandName"/>
 
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.brandName" required></b-form-input>
-            </b-col>
+          <jmv43-modal-slot label="LOGO:">
 
-          </b-row>
-
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>LOGO:</label>
-            </b-col>
+            <jmv33-files-upload :url="$rts.insert_file_upload"
+                                field="files"
+                                :limit='1'
+                                :replace="file_upload_data.replace"
+                                :show="file_upload_data.imgUrl"
+                                :on-success="onUploadSuccess"/>
 
 
-            <b-col sm="8">
-
-<!--              <jmv33-files-upload :jmv33_files_upload_data="file_upload_data" :on-success="onUploadSuccess"/>-->
-
-              <jmv33-files-upload :url="$rts.insert_file_upload"
-                                  field="files"
-                                  :limit='1'
-                                  :replace="file_upload_data.replace"
-                                  :show="file_upload_data.imgUrl"
-                                  :on-success="onUploadSuccess"/>
-
-            </b-col>
-
-          </b-row>
+          </jmv43-modal-slot>
 
           <hr>
 

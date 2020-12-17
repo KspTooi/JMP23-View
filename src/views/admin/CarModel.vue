@@ -17,29 +17,9 @@
 
         <template v-slot:modal_content>
 
-          <b-row style="margin: 1rem 3rem">
+          <jmv43-modal-input label="品牌名称:" v-model="modal_data.request.brandName" ></jmv43-modal-input>
 
-            <b-col sm="4">
-              <label>品牌名称:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.brandName" required></b-form-input>
-            </b-col>
-
-          </b-row>
-
-          <b-row style="margin: 1rem 3rem">
-
-            <b-col sm="4">
-              <label>车系名称:</label>
-            </b-col>
-
-            <b-col sm="8">
-              <b-form-input size="sm" v-model="modal_data.request.name" required></b-form-input>
-            </b-col>
-
-          </b-row>
+          <jmv43-modal-input label="车系名称:" v-model="modal_data.request.name" ></jmv43-modal-input>
 
         </template>
 

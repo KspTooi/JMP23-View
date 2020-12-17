@@ -15,85 +15,32 @@
 
       <template v-slot:modal_content="data">
 
-        <b-row style="margin: 1rem 3rem">
 
-          <b-col sm="3">
-            <label>用户名:</label>
-          </b-col>
+        <jmv43-modal-input label="用户名:" v-model="modal_data.request.username"/>
+        <jmv43-modal-input label="密码:" v-model="modal_data.request.password"/>
+        <jmv43-modal-input label="手机号:" v-model="modal_data.request.mobile" />
+        <jmv43-modal-input label="邮箱:" v-model="modal_data.request.email" />
 
-          <b-col sm="9">
-            <b-form-input size="sm" v-model="modal_data.request.username" required></b-form-input>
-          </b-col>
+        <jmv43-modal-slot label="状态:">
 
-        </b-row>
+          <b-radio-group size="sm" v-model="modal_data.request.status" required>
+            <b-radio value="1">启用</b-radio>
+            <b-radio value="0">禁用</b-radio>
+          </b-radio-group>
 
-        <b-row style="margin: 1rem 3rem">
+        </jmv43-modal-slot>
 
-          <b-col sm="3">
-            <label>密码:</label>
-          </b-col>
+        <jmv43-modal-slot label="角色:">
 
-          <b-col sm="9">
-            <b-form-input type="password" size="sm" v-model="modal_data.request.password" required></b-form-input>
-          </b-col>
+          <b-select v-model="modal_data.request.role" size="sm" required>
+            <b-select-option value="5">管理员</b-select-option>
+            <b-select-option value="6">测试人员</b-select-option>
+          </b-select>
 
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>手机号:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-form-input size="sm" v-model="modal_data.request.mobile" required></b-form-input>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>邮箱:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-form-input size="sm" v-model="modal_data.request.email" required></b-form-input>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>状态:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-radio-group size="sm" v-model="modal_data.request.status" required>
-              <b-radio value="1">启用</b-radio>
-              <b-radio value="0">禁用</b-radio>
-            </b-radio-group>
-          </b-col>
-
-        </b-row>
-
-        <b-row style="margin: 1rem 3rem">
-
-          <b-col sm="3">
-            <label>角色:</label>
-          </b-col>
-
-          <b-col sm="9">
-            <b-select v-model="modal_data.request.role" size="sm" required>
-              <b-select-option value="5">管理员</b-select-option>
-              <b-select-option value="6">测试人员</b-select-option>
-            </b-select>
-          </b-col>
-
-        </b-row>
+        </jmv43-modal-slot>
 
       </template>
+
     </jmv43-modal>
 
 

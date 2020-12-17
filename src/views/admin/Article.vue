@@ -103,7 +103,14 @@
 
 
     <template v-slot:area-table-head>
-      <jmp23-table-head insert-btn-text="添加资讯" placeholder="搜索资讯" @onFilterChange="onFilterChange" @onInsert="onInsert" @onRefresh="$refs.table.commit()"/>
+
+      <jmp23-table-head insert-btn-text="添加资讯"
+                        placeholder="搜索资讯"
+                        :on-insert="onInsert"
+                        :on-refresh="()=>{$refs.table.commit()}"
+                        :on-filter-change="onFilterChange"
+      />
+
     </template>
 
 
@@ -169,7 +176,6 @@ export default {
   },
 
   methods:{
-
 
     imageUploadHandler(blobInfo, success, failure){
 

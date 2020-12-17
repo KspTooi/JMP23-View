@@ -31,7 +31,14 @@
 
     <template v-slot:area-table-head>
 
-      <jmp23-table-head insert-btn-text="新增厂商" placeholder="搜索厂商" @onFilterChange="onFilterChange" @onInsert="onInsert" @onRefresh="$refs.table.commit()"/>
+
+      <jmp23-table-head insert-btn-text="新增厂商"
+                        placeholder="搜索厂商"
+                        :on-insert="onInsert"
+                        :on-refresh="()=>{$refs.table.commit()}"
+                        :on-filter-change="onFilterChange"
+      />
+
 
     </template>
 

@@ -102,7 +102,12 @@
 
         <b-card-body>
 
-          <jmp23-table-head :jmp23_table_head_data="table_head_data" @onInsert="onInsert" @onRefresh="onRefresh" @onFilterChange="onFilterChange"/>
+          <jmp23-table-head insert-btn-text="新增用户"
+                            placeholder="按名称"
+                            :on-insert="onInsert"
+                            :on-refresh="()=>{$refs.table.commit()}"
+                            :on-filter-change="onFilterChange"
+          />
 
         </b-card-body>
 
@@ -180,11 +185,6 @@ export default {
 
 
   ,methods: {
-
-    //刷新列表
-    onRefresh(){
-      this.$refs.table.commit();
-    },
 
     //列表查询条件更改
     onFilterChange(nvar){

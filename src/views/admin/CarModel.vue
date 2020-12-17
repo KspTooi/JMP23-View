@@ -42,7 +42,12 @@
 
     <template v-slot:area-table-head>
 
-      <jmp23-table-head insert-btn-text="新增车系" placeholder="搜索车系" @onFilterChange="onFilterChange" @onInsert="onInsert" @onRefresh="$refs.table.commit()"/>
+      <jmp23-table-head insert-btn-text="新增车系"
+                        placeholder="搜索车系"
+                        :on-insert="onInsert"
+                        :on-refresh="()=>{$refs.table.commit()}"
+                        :on-filter-change="onFilterChange"
+      />
 
     </template>
 

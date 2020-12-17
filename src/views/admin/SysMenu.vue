@@ -115,12 +115,20 @@
         <hr>
         <b-card-body>
 
-          <jmp23-table-head placeholder="按菜单名搜索" insert-btn-text="新增菜单" @onInsert="onInsert" @onRefresh="onRefresh" @onFilterChange="onFilterChange">
+
+          <jmp23-table-head insert-btn-text="按菜单名搜索"
+                            placeholder="新增菜单"
+                            :on-insert="onInsert"
+                            :on-refresh="()=>{$refs.table.commit()}"
+                            :on-filter-change="onFilterChange">
+
             <template v-slot:headExtra>
               <b-col cols="md-3">
                 <b-checkbox value="true" v-model="parentOnly">仅显示父级菜单</b-checkbox>
               </b-col>
             </template>
+
+
           </jmp23-table-head>
 
 

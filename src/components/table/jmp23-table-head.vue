@@ -15,9 +15,9 @@
 
       <b-btn-group>
 
-        <b-btn variant="info" @click="$emit('onInsert')">{{insertBtnText}}</b-btn>
+        <b-btn variant="info" @click="onInsert">{{insertBtnText}}</b-btn>
 
-        <b-btn variant="info" @click="$emit('onRefresh')">
+        <b-btn variant="info" @click="onRefresh">
           <span class="el-icon-refresh"/>刷新
         </b-btn>
 
@@ -54,6 +54,18 @@ export default {
         return "新增"
       }
     },
+    onInsert:{
+      type:Function,
+      default:null,
+    },
+    onRefresh:{
+      type:Function,
+      default:null,
+    },
+    onFilterChange:{
+      type:Function,
+      default:null,
+    }
 
 
   }
@@ -67,8 +79,8 @@ export default {
 
     filter:{
       deep:true,
-      handler(nvar){
-        this.$emit("onFilterChange",nvar);
+      handler(val){
+        this.onFilterChange(val);
       }
     }
 

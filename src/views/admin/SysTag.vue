@@ -47,7 +47,12 @@
 
     <template v-slot:area-table-head>
 
-      <jmp23-table-head insert-btn-text="添加标签" placeholder="按标签名搜索" @onFilterChange="onFilterChange" @onInsert="onInsert"/>
+      <jmp23-table-head insert-btn-text="添加标签"
+                        placeholder="按标签名搜索"
+                        :on-insert="onInsert"
+                        :on-refresh="()=>{$refs.table.commit()}"
+                        :on-filter-change="onFilterChange"
+      />
 
     </template>
 

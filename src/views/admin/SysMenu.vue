@@ -175,9 +175,8 @@
 import Jmv33Select from "@/components/jmv33-components/general/jmv33-select";
 export default{
 
-  name: "Login"
+  name: "Login",
 
-  ,
   components: {Jmv33Select},
   watch:{
 

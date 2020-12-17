@@ -75,6 +75,7 @@ import jmv33TableGeneral from "@/components/jmv33-components/table/jmv33-table-g
 
 //JMV33通用模态框
 import jmv33Modal from "@/components/jmv33-components/modal/jmv33-modal"
+import jmv43Modal from "@/components/jmv33-components/modal/jmv43-modal"
 
 //JM33通用文件上传
 import jmv33FileUpload from "@/components/jmv33-components/general/jmv33-files-upload"
@@ -102,6 +103,7 @@ Vue.component("jmp23-center-card",centerCard)
 Vue.component("jmv33-table-general",jmv33TableGeneral)
 Vue.component("jmv33-modal",jmv33Modal)
 Vue.component("jmv33-file-upload",jmv33FileUpload)
+Vue.component("jmv43-modal",jmv43Modal)
 
 
 

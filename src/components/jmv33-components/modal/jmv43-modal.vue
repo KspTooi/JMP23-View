@@ -1,10 +1,10 @@
 <template>
 
-  <b-modal id="modal" :title="modal_data.title" centered hide-footer no-enforce-focus>
+  <b-modal id="modal" :title="title" centered hide-footer no-enforce-focus>
 
     <b-form @submit.prevent="modal_request">
 
-      <slot name="modal_content" v-bind="modal_data.request"/>
+      <slot name="modal_content" v-bind="request"/>
 
 
       <b-row style="text-align: center">
@@ -32,64 +32,64 @@ export default {
 
   ,props:{
 
-    jmv33_modal_data:{
-
-      type:Object
-
-      ,default: ()=>{
-        return {
-          title: 'JMV33模态框'
-          ,reqType:"insert"
-          ,insert:null
-          ,update:null
-          ,remove:null
-          ,request:{
-          }
-        }
-
-      }
+    title:{
+      type: String,
+      default:"JMV43模态框"
+    },
+    reqType:{
+      type: String,
+      default:"insert"
+    },
+    insert:{
+      type: String,
+      default:""
+    },
+    update:{
+      type: String,
+      default:""
+    },
+    remove:{
+      type: String,
+      default:""
+    },
+    request:{
+      type: Object,
+      default:{}
+    },
+    requestDone:{
+      type: Function,
+      default:null
     }
+
   }
 
   ,data(){
     return{
-
-
-      modal_data:{
-
-        title:this.jmv33_modal_data.title
-        ,reqType:this.jmv33_modal_data.reqType
-        ,insert:this.jmv33_modal_data.insert
-        ,update:this.jmv33_modal_data.update
-        ,remove:this.jmv33_modal_data.remove
-        ,request:this.jmv33_modal_data.request
-
-      }
 
     }
   }
 
   ,watch:{
 
-    jmv33_modal_data:{
+/*    jmv33_modal_data:{
       deep:true
       ,handler(nvar){
         this.modal_data.reqType = nvar.reqType;
         this.modal_data.request = nvar.request;
       }
-    }
+    }*/
 
   }
 
   ,mounted() {
 
-    this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+/*    this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
       this.$emit("onModalCreate");
     })
 
     this.$root.$on('bv::modal::hide', (bvEvent, modalId) => {
       this.$emit("onModalClose");
-    })
+    })*/
 
   }
 
@@ -102,7 +102,7 @@ export default {
 
     //打开模态框并清空所有请求数据
     ,loadClear(){
-      this.modal_data.request = {};
+      this.request = {};
       this.$bvModal.show("modal");
     }
 
@@ -128,9 +128,6 @@ export default {
 
     }
 
-    ,aaa(){
-     console.log(123)
-    }
 
     ,commit(){
       this.modal_request();
@@ -142,21 +139,21 @@ export default {
 
     ,modal_request(){
 
-      let url = this.modal_data.update;
+      let url = this.update;
 
-      if(this.modal_data.reqType === "insert"){
-        url = this.modal_data.insert;
+      if(this.reqType === "insert") {
+        url = this.insert;
       }
 
-      if(this.modal_data.reqType === "update"){
-        url = this.modal_data.update;
+      if(this.reqType === "update"){
+        url = this.update;
       }
 
-      if(this.modal_data.reqType === "remove"){
-        url = this.modal_data.remove;
+      if(this.reqType === "remove"){
+        url = this.remove;
       }
 
-      let req = this.$rts.post(url,this.modal_data.request);
+      let req = this.$rts.post(url,this.request);
 
       req.then((ret)=>{
 
@@ -165,7 +162,7 @@ export default {
 
           this.$bvModal.hide("modal");
 
-          this.$emit("done")
+          this.requestDone();
 
           return true;
         }

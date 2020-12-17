@@ -3,7 +3,19 @@
   <b-card style="margin: 1rem 1rem 10rem 1rem" bg-variant="light">
 
 
-    <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()">
+
+
+
+
+    <jmv43-modal ref="modal"
+                 title="用户管理"
+                 :insert="$rts.insert_user"
+                 :update="$rts.update_user"
+                 :remove="$rts.remove_user"
+                 :req-type="modal_data.reqType"
+                 :request="modal_data.request"
+                 :request-done="()=>{$refs.table.commit()}"
+    >
 
       <template v-slot:modal_content="data">
 
@@ -86,7 +98,7 @@
         </b-row>
 
       </template>
-    </jmv33-modal>
+    </jmv43-modal>
 
 
     <template v-slot:header>
@@ -155,12 +167,6 @@ export default {
   data(){
     return{
 
-      //表头数据
-      table_head_data:{
-        placeholder:"按名称筛选"
-        ,insertBtnText:"新增用户"
-      },
-
       //表格数据
       table_data:{
         filter: '',
@@ -169,15 +175,9 @@ export default {
 
       //模态框的数据
       ,modal_data:{
-
-        title:'用户管理'
-        ,reqType:"insert"
-        ,insert:this.$rts.insert_user
-        ,update:this.$rts.update_user
-        ,remove:this.$rts.remove_user
+        reqType:"insert"
         ,request:{
         }
-
       }
 
     }

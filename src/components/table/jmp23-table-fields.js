@@ -140,6 +140,61 @@ export default {
             ,label:"操作"
         }
     ]
+    ,fields_car_manufacturer:[
+        {
+            key:"manufacturerName"
+            ,label:"制造商名称"
+        },
+        {
+            key:"createTime"
+            ,label:"创建时间"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
+    ,fields_car_model:[
+        {
+            key:"brandName"
+            ,label:"品牌名称"
+        },
+        {
+            key:"name"
+            ,label:"车系名称"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
+    ,fields_car_paramtype:[
+        {
+            key:"typeName"
+            ,label:"参数名称"
+        },
+        {
+            key:"state"
+            ,label:"是否有效"
+        },
+        /*        {
+                    key:"englishName"
+                    ,label:"英文名"
+                },
+                {
+                    key:"phone"
+                    ,label:"联系人"
+                },
+                {
+                    key:"website"
+                    ,label:"网站"
+                },*/
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
+
 
 
 

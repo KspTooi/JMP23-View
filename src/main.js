@@ -76,6 +76,9 @@ import jmv33TableGeneral from "@/components/jmv33-components/table/jmv33-table-g
 //JMV33通用模态框
 import jmv33Modal from "@/components/jmv33-components/modal/jmv33-modal"
 
+//JM33通用文件上传
+import jmv33FileUpload from "@/components/jmv33-components/general/jmv33-files-upload"
+
 
 //富文本编辑器
 Vue.component("editor",tinymce)
@@ -98,6 +101,7 @@ Vue.component("jmp23-center-card",centerCard)
 //JMV组件
 Vue.component("jmv33-table-general",jmv33TableGeneral)
 Vue.component("jmv33-modal",jmv33Modal)
+Vue.component("jmv33-file-upload",jmv33FileUpload)
 
 
 
@@ -126,6 +130,8 @@ Vue.use(BootstrapVueIcons);
 
 /*整合弹窗组件*/
 Vue.use(VueSweetalert2);
+
+
 
 router.beforeEach((to, from, next) => {
 

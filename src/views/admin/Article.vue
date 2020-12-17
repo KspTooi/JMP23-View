@@ -4,6 +4,7 @@
 
 
     <template v-slot:area-modal>
+
       <jmv33-modal ref="modal" :jmv33_modal_data="modal_data" @done="$refs.table.commit()" >
 
         <template v-slot:modal_content>

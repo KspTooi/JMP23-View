@@ -63,6 +63,21 @@ const routes = [
                 name: 'carMake',
                 component: () => import("@/views/admin/CarMake")
             }
+            ,{
+                path: 'carManufacturer',
+                name: 'carMake',
+                component: () => import("@/views/admin/CarManufacturer")
+            }
+            ,{
+                path: 'carModel',
+                name: 'carModel',
+                component: () => import("@/views/admin/CarModel")
+            }
+            ,{
+                path: 'carParamType',
+                name: 'carParamType',
+                component: () => import("@/views/admin/CarParamType")
+            }
         ]
     }
 

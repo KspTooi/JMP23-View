@@ -56,6 +56,18 @@
             <i class="el-icon-menu"/>品牌管理
           </el-menu-item>
 
+          <el-menu-item index="/admin/CarParamType">
+            <i class="el-icon-menu"/>参数分类管理
+          </el-menu-item>
+
+          <el-menu-item index="/admin/CarManufacturer">
+            <i class="el-icon-menu"/>厂商管理
+          </el-menu-item>
+
+          <el-menu-item index="/admin/CarModel">
+            <i class="el-icon-menu"/>车系管理
+          </el-menu-item>
+
         </el-menu-item-group>
 
 

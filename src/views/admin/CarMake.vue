@@ -30,7 +30,9 @@
 
             <b-col sm="8">
 
-              <img :src="$rts.get_file_image+'/'+modal_data.request.coverPic" style="width: 80px" alt="暂无图片" v-if="!changeCoverImg">
+              <jmv33-files-upload :jmv33_files_upload_data="file_upload_data" @onUploadSuccess="onUploadSuccess"/>
+
+<!--              <img :src="$rts.get_file_image+'/'+modal_data.request.logoUrl" style="width: 80px" alt="暂无图片" v-if="!changeCoverImg">
 
               <b-btn size="sm" variant="success" @click="changeCoverImg=true" v-if="!changeCoverImg" style="margin-left: 20px">更换图片</b-btn>
 
@@ -44,7 +46,7 @@
               >
                 <el-button size="small" type="primary">点击上传</el-button>
                 <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-              </el-upload>
+              </el-upload>-->
             </b-col>
 
           </b-row>
@@ -103,7 +105,11 @@
 
       <jmv33-table-general ref="table" :jmv33_table_data="table_data" @onUpdate="onUpdate" @onRemove="onRemove" >
 
+        <template v-slot:cell(logoUrl)="data">
 
+          <img :src="$rts.get_file_image+'/'+data.item.logoUrl" style="width: 80px" alt="暂无图片">
+
+        </template>
 
       </jmv33-table-general>
 
@@ -116,15 +122,25 @@
 </template>
 
 <script>
+import Jmv33FilesUpload from "@/components/jmv33-components/general/jmv33-files-upload";
 export default {
 
   name: "brandManager",
-
+  components: {Jmv33FilesUpload},
   data(){
     return{
 
 
       changeCoverImg:false,
+
+      file_upload_data:{
+        url:this.$rts.insert_file_upload
+        ,imgUrl:""
+        ,limit:1
+        ,field:"files"
+        ,replace:false
+      },
+
 
       table_data:{
 
@@ -156,8 +172,16 @@ export default {
   methods:{
 
 
-    fileUploadSuccess(ret, file, fileList){
+    onUploadSuccess(ret, file, fileList){
+      if(ret.code === 200){
+        this.modal_data.request.logoUrl = ret.payload[0];
+      }
+    },
 
+    fileUploadSuccess(ret, file, fileList){
+      if(ret.code === 200){
+        this.modal_data.request.logoUrl = ret.payload[0];
+      }
     },
 
 
@@ -169,6 +193,9 @@ export default {
     onInsert(){
 
       this.modal_data.reqType = "insert";
+      this.changeCoverImg = true;
+
+      this.file_upload_data.replace=true;
 
       this.$refs.modal.load();
 
@@ -177,16 +204,20 @@ export default {
     onUpdate(val){
 
       this.modal_data.reqType = "update";
+      this.changeCoverImg = false;
 
       this.modal_data.request = val.item;
 
-      this.$refs.modal.load();
+      this.file_upload_data.imgUrl = this.$rts.get_file_image+val.item.logoUrl;
+      this.file_upload_data.replace=false;
 
+      this.$refs.modal.load();
     },
 
     onRemove(val){
 
-
+      this.modal_data.reqType = "remove";
+      this.modal_data.request = val.item;
       this.$refs.modal.commitQuestion("确认要移除该品牌吗?");
 
     }

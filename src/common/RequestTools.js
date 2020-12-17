@@ -81,6 +81,30 @@ export default {
 
     ,remove_make:server + "/admin/v1/make/remove"
 
+    ,list_carmanufacturer:server + "/admin/v1/manufacturer/list"
+
+    ,insert_carmanufacturer:server + "/admin/v1/manufacturer/insert"
+
+    ,update_carmanufacturer:server + "/admin/v1/manufacturer/update"
+
+    ,remove_carmanufacturer:server + "/admin/v1/manufacturer/remove"
+
+    ,list_paramtype:server + "/admin/v1/paramtype/list"
+
+    ,insert_paramtype:server + "/admin/v1/paramtype/insert"
+
+    ,update_paramtype:server + "/admin/v1/paramtype/update"
+
+    ,remove_paramtype:server + "/admin/v1/paramtype/remove"
+
+    ,list_carmodel:server + "/admin/v1/carmodel/list"
+
+    ,insert_carmodel:server + "/admin/v1/carmodel/insert"
+
+    ,update_carmodel:server + "/admin/v1/carmodel/update"
+
+    ,remove_carmodel:server + "/admin/v1/carmodel/remove"
+
 
 
 

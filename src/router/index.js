@@ -10,7 +10,7 @@ const routes = [
     {
         path: '/order',
         name: 'order',
-        component: () => import("../views/admin/Order")
+        component: () => import("@/views/admin/Login")
     },
     {
         path: '/',
@@ -77,6 +77,11 @@ const routes = [
                 path: 'carParamType',
                 name: 'carParamType',
                 component: () => import("@/views/admin/CarParamType")
+            }
+            ,{
+                path: 'fileUpload',
+                name: 'fileUpload',
+                component: () => import("@/views/admin/FileUpload")
             }
         ]
     }

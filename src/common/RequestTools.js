@@ -30,7 +30,6 @@ export default {
 
     ,code_error:500
 
-
     ,get_file_image:server + "/"
 
     ,insert_file_upload:server + "/admin/v1/files/insert"

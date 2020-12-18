@@ -17,8 +17,11 @@
 
 
         <jmv43-modal-input label="用户名:" v-model="modal_data.request.username"/>
+
         <jmv43-modal-input label="密码:" v-model="modal_data.request.password"/>
+
         <jmv43-modal-input label="手机号:" v-model="modal_data.request.mobile" />
+
         <jmv43-modal-input label="邮箱:" v-model="modal_data.request.email" />
 
         <jmv43-modal-slot label="状态:">
@@ -54,6 +57,7 @@
       <b-card title="操作">
 
         <hr>
+
 
         <b-card-body>
 
@@ -172,5 +176,8 @@ export default {
 </script>
 
 <style scoped>
+
+
+
 
 </style>

@@ -93,20 +93,20 @@ export default {
 
   }
 
-  ,methods:{
+  ,methods: {
 
     //打开模态框
-    load(){
+    load() {
       this.$bvModal.show("modal");
     }
 
     //打开模态框并清空所有请求数据
-    ,loadClear(){
+    , loadClear() {
       this.request = {};
       this.$bvModal.show("modal");
     }
 
-/*    ,loadWithData(reqType,request){
+    /*    ,loadWithData(reqType,request){
 
       this.modal_data.reqType = reqType;
       this.modal_data.request = request;
@@ -114,14 +114,14 @@ export default {
       this.$bvModal.show("modal");
     }*/
 
-    ,commitQuestion(question){
+    , commitQuestion(question) {
 
       this.$swal.fire({
         title: question,
         showCancelButton: true,
-        icon:"question"
+        icon: "question"
       }).then((ret) => {
-        if(ret.isConfirmed){
+        if (ret.isConfirmed) {
           this.commit();
         }
       })
@@ -129,54 +129,55 @@ export default {
     }
 
 
-    ,commit(){
+    , commit() {
       this.modal_request();
     }
 
-    ,close(){
+    , close() {
       this.$bvModal.hide("modal");
     }
 
-    ,modal_request(){
+    , modal_request() {
 
       let url = this.update;
 
-      if(this.reqType === "insert") {
-        url = this.insert;
-      }
-
-      if(this.reqType === "update"){
-        url = this.update;
-      }
-
-      if(this.reqType === "remove"){
-        url = this.remove;
-      }
-
-      let req = this.$rts.post(url,this.request);
-
-      req.then((ret)=>{
-
-        if(ret.data.code === this.$url.code_success){
-          this.$swal.fire(ret.data.msg,"","success");
-
-          this.$bvModal.hide("modal");
-
-          this.requestDone();
-
-          return true;
+      if (this.reqType === "insert") {
+        {
+          url = this.insert;
         }
 
-        this.$swal.fire(ret.data.msg,"","error");
+        if (this.reqType === "update") {
+          url = this.update;
+        }
 
-      })
+        if (this.reqType === "remove") {
+          url = this.remove;
+        }
+
+        let req = this.$rts.post(url, this.request);
+
+        req.then((ret) => {
+
+          if (ret.data.code === this.$url.code_success) {
+            this.$swal.fire(ret.data.msg, "", "success");
+
+            this.$bvModal.hide("modal");
+
+            this.requestDone();
+
+            return true;
+          }
+
+          this.$swal.fire(ret.data.msg, "", "error");
+
+        })
+
+      }
 
     }
 
+
   }
-
-
-
 
 }
 </script>

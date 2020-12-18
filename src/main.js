@@ -49,6 +49,9 @@ import tinymce1 from 'tinymce'
 import 'tinymce/skins/ui/oxide/skin.css'
 import 'tinymce/icons/default/icons'
 import 'tinymce/themes/silver'
+
+
+
 import 'tinymce/plugins/advlist'
 import 'tinymce/plugins/autolink'
 import 'tinymce/plugins/lists'

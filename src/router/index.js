@@ -26,7 +26,7 @@ const routes = [
             {
                 path: '/',
                 name: 'index',
-                component: () => import("@/components/admin/Index")
+                component: () => import("@/views/admin/Index")
             },
             {
                 path: 'login',

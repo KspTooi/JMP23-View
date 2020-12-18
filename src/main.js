@@ -99,6 +99,14 @@ import jmv33FileUpload from "@/components/jmv33-components/general/jmv33-files-u
 import jmv43Editor from "@/components/jmv33-components/general/jmv43-editor"
 Vue.component("jmv43-editor",jmv43Editor)
 
+//echarts图标插件
+import ECharts from 'vue-echarts'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/component/title'
+
+Vue.component("v-chart", ECharts) // 註冊為 global component
 
 //富文本编辑器
 Vue.component("editor",tinymce)

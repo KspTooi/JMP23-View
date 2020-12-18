@@ -80,6 +80,10 @@
             <i class="el-icon-menu"/>活动管理
           </el-menu-item>
 
+          <el-menu-item index="/admin/message">
+            <i class="el-icon-menu"/>消息管理
+          </el-menu-item>
+
 
         </el-menu-item-group>
 

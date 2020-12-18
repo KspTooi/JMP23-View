@@ -136,6 +136,14 @@ export default {
     ,remove_activity:server + "/admin/v1/activity/remove"
 
 
+    ,list_message:server + "/admin/v1/message/list"
+
+    ,insert_message:server + "/admin/v1/message/insert"
+
+    ,update_message:server + "/admin/v1/message/update"
+
+    ,remove_message:server + "/admin/v1/message/remove"
+
 
 
     ,post(url,data) {

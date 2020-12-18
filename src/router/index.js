@@ -93,6 +93,11 @@ const routes = [
                 name: 'activity',
                 component: () => import("@/views/admin/Activity")
             }
+            ,{
+                path: 'message',
+                name: 'message',
+                component: () => import("@/views/admin/Message")
+            }
         ]
     }
 

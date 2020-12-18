@@ -252,6 +252,24 @@ export default {
             ,label:"操作"
         }
     ]
+    ,fields_message:[
+        {
+            key:"id"
+            ,label:"id"
+        },
+        {
+            key:"content"
+            ,label:"内容"
+        },
+        {
+            key: "link"
+            , label: "链接"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
 
 
 

@@ -68,6 +68,19 @@
             <i class="el-icon-menu"/>车系管理
           </el-menu-item>
 
+          <el-menu-item index="/admin/car">
+            <i class="el-icon-menu"/>车款管理
+          </el-menu-item>
+
+          <el-menu-item index="/admin/product">
+            <i class="el-icon-menu"/>商品管理
+          </el-menu-item>
+
+          <el-menu-item index="/admin/activity">
+            <i class="el-icon-menu"/>活动管理
+          </el-menu-item>
+
+
         </el-menu-item-group>
 
 

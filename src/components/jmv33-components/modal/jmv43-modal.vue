@@ -28,7 +28,7 @@
 <script>
 export default {
 
-  name: "jmv33-modal"
+   name: "jmv33-modal"
 
   ,props:{
 

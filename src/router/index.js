@@ -26,7 +26,7 @@ const routes = [
             {
                 path: '/',
                 name: 'index',
-                component: () => import("@/components/admin/Index")
+                component: () => import("@/views/admin/Index")
             },
             {
                 path: 'login',
@@ -79,9 +79,24 @@ const routes = [
                 component: () => import("@/views/admin/CarParamType")
             }
             ,{
-                path: 'fileUpload',
-                name: 'fileUpload',
-                component: () => import("@/views/admin/FileUpload")
+                path: 'car',
+                name: 'car',
+                component: () => import("@/views/admin/Car")
+            }
+            ,{
+                path: 'product',
+                name: 'product',
+                component: () => import("@/views/admin/Product")
+            }
+            ,{
+                path: 'activity',
+                name: 'activity',
+                component: () => import("@/views/admin/Activity")
+            }
+            ,{
+                path: 'message',
+                name: 'message',
+                component: () => import("@/views/admin/Message")
             }
         ]
     }

@@ -30,48 +30,46 @@ export default {
 
    name: "jmv33-modal"
 
-  ,props:{
+  , props: {
 
-    title:{
+    title: {
       type: String,
-      default:"JMV43模态框"
+      default: "JMV43模态框"
     },
-    reqType:{
+    reqType: {
       type: String,
-      default:"insert"
+      default: "insert"
     },
-    insert:{
+    insert: {
       type: String,
-      default:""
+      default: ""
     },
-    update:{
+    update: {
       type: String,
-      default:""
+      default: ""
     },
-    remove:{
+    remove: {
       type: String,
-      default:""
+      default: ""
     },
-    request:{
+    request: {
       type: Object,
-      default:{}
+      default: {}
     },
-    requestDone:{
+    requestDone: {
       type: Function,
-      default:null
+      default: null
     }
 
   }
 
-  ,data(){
-    return{
-
-    }
+  , data() {
+    return {}
   }
 
-  ,watch:{
+  , watch: {
 
-/*    jmv33_modal_data:{
+    /*    jmv33_modal_data:{
       deep:true
       ,handler(nvar){
         this.modal_data.reqType = nvar.reqType;
@@ -81,9 +79,9 @@ export default {
 
   }
 
-  ,mounted() {
+  , mounted() {
 
-/*    this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+    /*    this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
       this.$emit("onModalCreate");
     })
 
@@ -93,7 +91,7 @@ export default {
 
   }
 
-  ,methods: {
+  , methods: {
 
     //打开模态框
     load() {
@@ -116,6 +114,7 @@ export default {
 
     , commitQuestion(question) {
 
+
       this.$swal.fire({
         title: question,
         showCancelButton: true,
@@ -125,6 +124,7 @@ export default {
           this.commit();
         }
       })
+
 
     }
 
@@ -142,40 +142,37 @@ export default {
       let url = this.update;
 
       if (this.reqType === "insert") {
-        {
-          url = this.insert;
-        }
-
-        if (this.reqType === "update") {
-          url = this.update;
-        }
-
-        if (this.reqType === "remove") {
-          url = this.remove;
-        }
-
-        let req = this.$rts.post(url, this.request);
-
-        req.then((ret) => {
-
-          if (ret.data.code === this.$url.code_success) {
-            this.$swal.fire(ret.data.msg, "", "success");
-
-            this.$bvModal.hide("modal");
-
-            this.requestDone();
-
-            return true;
-          }
-
-          this.$swal.fire(ret.data.msg, "", "error");
-
-        })
-
+        url = this.insert;
       }
 
-    }
+      if (this.reqType === "update") {
+        url = this.update;
+      }
 
+      if (this.reqType === "remove") {
+        url = this.remove;
+      }
+
+      let req = this.$rts.post(url, this.request);
+
+      req.then((ret) => {
+
+        if (ret.data.code === this.$url.code_success) {
+
+          this.$swal.fire(ret.data.msg, "", "success");
+
+          this.$bvModal.hide("modal");
+
+          this.requestDone();
+
+          return true;
+        }
+
+        this.$swal.fire(ret.data.msg, "", "error");
+
+      })
+
+    }
 
   }
 

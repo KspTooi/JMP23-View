@@ -96,6 +96,7 @@ export default {
 
     ,remove_paramtype:server + "/admin/v1/paramtype/remove"
 
+
     ,list_carmodel:server + "/admin/v1/carmodel/list"
 
     ,insert_carmodel:server + "/admin/v1/carmodel/insert"
@@ -104,6 +105,44 @@ export default {
 
     ,remove_carmodel:server + "/admin/v1/carmodel/remove"
 
+
+
+    ,list_car:server + "/admin/v1/car/list"
+
+    ,insert_car:server + "/admin/v1/car/insert"
+
+    ,update_car:server + "/admin/v1/car/update"
+
+    ,remove_car:server + "/admin/v1/car/remove"
+
+
+
+    ,list_product:server + "/admin/v1/product/list"
+
+    ,insert_product:server + "/admin/v1/product/insert"
+
+    ,update_product:server + "/admin/v1/product/update"
+
+    ,remove_product:server + "/admin/v1/product/remove"
+
+
+
+    ,list_activity:server + "/admin/v1/activity/list"
+
+    ,insert_activity:server + "/admin/v1/activity/insert"
+
+    ,update_activity:server + "/admin/v1/activity/update"
+
+    ,remove_activity:server + "/admin/v1/activity/remove"
+
+
+    ,list_message:server + "/admin/v1/message/list"
+
+    ,insert_message:server + "/admin/v1/message/insert"
+
+    ,update_message:server + "/admin/v1/message/update"
+
+    ,remove_message:server + "/admin/v1/message/remove"
 
 
 

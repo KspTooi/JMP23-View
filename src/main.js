@@ -89,10 +89,24 @@ import jmv43statusFormatter from "@/components/jmv33-components/general/jmv43-st
 //JMV43模态槽位
 import jmv43ModalSlot from "@/components/jmv33-components/modal/jmv43-modal-slot"
 import jmv43ModalInput from "@/components/jmv33-components/modal/jmv43-modal-input"
+import jmv43ModalInputDate from "@/components/jmv33-components/modal/jmv43-modal-input-date"
+Vue.component("jmv43-modal-input-date",jmv43ModalInputDate)
 
 //JM33通用文件上传
 import jmv33FileUpload from "@/components/jmv33-components/general/jmv33-files-upload"
 
+//JMV43富文本编辑器
+import jmv43Editor from "@/components/jmv33-components/general/jmv43-editor"
+Vue.component("jmv43-editor",jmv43Editor)
+
+//echarts图标插件
+import ECharts from 'vue-echarts'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/component/title'
+
+Vue.component("v-chart", ECharts) // 註冊為 global component
 
 //富文本编辑器
 Vue.component("editor",tinymce)

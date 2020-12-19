@@ -194,6 +194,82 @@ export default {
             ,label:"操作"
         }
     ]
+    ,fields_car:[
+        {
+            key:"id"
+            ,label:"ID"
+        },
+        {
+            key:"name"
+            ,label:"车款名"
+        },
+        {
+            key:"makeId"
+            ,label:"厂商ID"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
+    ,fields_product:[
+        {
+            key:"name"
+            ,label:"商品名"
+        },
+        {
+            key:"service"
+            ,label:"售后服务"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
+    ,fields_activity:[
+        {
+            key:"title"
+            ,label:"活动名"
+        },
+        {
+            key:"author"
+            ,label:"活动创建者"
+        },
+        {
+            key:"begin_time"
+            ,label:"开始时间"
+        },
+        {
+            key:"end_time"
+            ,label:"结束时间"
+        },
+        {
+            key:"link"
+            ,label:"链接"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
+    ,fields_message:[
+        {
+            key:"id"
+            ,label:"id"
+        },
+        {
+            key:"content"
+            ,label:"内容"
+        },
+        {
+            key: "link"
+            , label: "链接"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
 
 
 

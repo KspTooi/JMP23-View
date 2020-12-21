@@ -17,6 +17,11 @@ const routes = [
         name: 'Home',
 /*        component: Home,*/
         redirect:"/admin"
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import("@/views/admin/Login")
     }
     ,{
         path: '/admin',

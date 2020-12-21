@@ -1,7 +1,29 @@
 import axios from "axios";
 import swal from "sweetalert2";
 
+
+
 let server = "http://127.0.0.1:18001";
+let oss = "https://jmp32.oss-cn-shenzhen.aliyuncs.com";
+
+
+const UNAUTHORIZED = 401;
+axios.interceptors.response.use(
+    response => response,
+
+    error => {
+
+        const {status} = error.response;
+
+        if(status === 401){
+            //swal.fire("验证失败,请登录.", "", "error");
+            sessionStorage.clear();
+        }
+
+
+        return Promise.reject(error);
+    }
+);
 
 
 axios.interceptors.request.use(
@@ -30,7 +52,7 @@ export default {
 
     ,code_error:500
 
-    ,get_file_image:server + "/"
+    ,get_file_image:oss + "/"
 
     ,insert_file_upload:server + "/admin/v1/files/insert"
 
@@ -151,7 +173,8 @@ export default {
 
         let promise = axios.post(url, data);
 
-        promise.catch(function () {
+        promise.catch(function (ret) {
+            console.log(ret)
             swal.fire("请求服务器时发生错误!", "", "error");
         })
 

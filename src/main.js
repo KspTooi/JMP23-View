@@ -3,6 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import swal from "sweetalert2";
 
 
 //引入内部常量
@@ -49,7 +50,6 @@ import tinymce1 from 'tinymce'
 import 'tinymce/skins/ui/oxide/skin.css'
 import 'tinymce/icons/default/icons'
 import 'tinymce/themes/silver'
-
 
 
 import 'tinymce/plugins/advlist'
@@ -167,6 +167,26 @@ Vue.use(VueSweetalert2);
 
 
 router.beforeEach((to, from, next) => {
+
+
+    if(to.path==="/login") {
+
+        if (sessionStorage.getItem("jToken") != null) {
+            swal.fire("已登录!!", "", "error")
+            next("/admin");
+            return;
+        }
+
+        next();
+        return;
+    }
+
+    if(sessionStorage.getItem("jToken")==null){
+        swal.fire("授权故障,请登录!","","error")
+        next("/login");
+        return;
+    }
+
 
     if(to.path === "/logout"){
         console.log("用户登出!");

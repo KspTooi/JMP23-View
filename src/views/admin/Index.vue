@@ -41,7 +41,7 @@ export default {
         },
         tooltip: {},
         legend: {
-          data: ["销量"]
+          data: ["点击率"]
         },
         xAxis: {
           data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]

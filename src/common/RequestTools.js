@@ -54,6 +54,8 @@ export default {
 
     ,get_file_image:oss + "/"
 
+    ,export_user:server + "/admin/v1/export/sysuser"
+
     ,insert_file_upload:server + "/admin/v1/files/insert"
 
     ,admin_account_login:server + "/admin/v1/login"

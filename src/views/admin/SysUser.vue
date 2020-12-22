@@ -66,7 +66,13 @@
                             :on-insert="onInsert"
                             :on-refresh="()=>{$refs.table.commit()}"
                             :on-filter-change="onFilterChange"
-          />
+          >
+
+            <template v-slot:headExtra>
+              <b-btn variant="primary" :href="$rts.export_user">导出数据</b-btn>
+            </template>
+
+          </jmp23-table-head>
 
         </b-card-body>
 

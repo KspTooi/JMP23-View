@@ -182,7 +182,7 @@ router.beforeEach((to, from, next) => {
     }
 
     if(sessionStorage.getItem("jToken")==null){
-        swal.fire("授权故障,请登录!","","error")
+        //swal.fire("授权故障,请登录!","","error")
         next("/login");
         return;
     }

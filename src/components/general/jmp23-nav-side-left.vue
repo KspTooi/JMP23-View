@@ -36,6 +36,10 @@
             <i class="el-icon-menu"/>用户管理
           </el-menu-item>
 
+          <el-menu-item index="/admin/sysRole">
+            <i class="el-icon-menu"/>角色管理
+          </el-menu-item>
+
           <el-menu-item index="/admin/sysMenu">
             <i class="el-icon-menu"/>菜单管理
           </el-menu-item>

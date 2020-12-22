@@ -43,6 +43,33 @@
               ></b-form-input>
             </b-form-group>
 
+
+            <b-form-row>
+              <b-col>
+                <b-form-group label="验证码:" label-for="input-2">
+                  <b-form-input
+                      type="text"
+                      id="input-2"
+                      v-model="req_data.kaptcha"
+                      required
+                      placeholder="kaptcha"
+                  ></b-form-input>
+                </b-form-group>
+              </b-col>
+
+              <b-col>
+
+                <img style="margin-top: 30px" :src="kaptchaImg" @click="refreshCaptcha">
+
+              </b-col>
+
+            </b-form-row>
+
+
+
+
+
+
 <!--            <b-form-group id="input-group-4">
               <b-form-checkbox-group v-model="req_data.checked" id="checkboxes-4">
                 <b-form-checkbox value="me">Check me out</b-form-checkbox>
@@ -50,9 +77,9 @@
               </b-form-checkbox-group>
             </b-form-group>-->
 
-            <b-button type="submit" variant="info">Submit</b-button>
+            <b-button type="submit" variant="info">登录</b-button>
             <span style="margin: 0 0.5rem"></span>
-            <b-button type="reset" variant="danger">Reset</b-button>
+            <b-button type="reset" variant="danger">重置</b-button>
           </b-form>
 <!--          <b-card class="mt-3" header="Form Data Result">
             <pre class="m-0">{{ req_data }}</pre>
@@ -82,19 +109,34 @@ export default {
   ,data() {
     return {
 
+      kaptchaImg:"",
+
       req_data:{
         username:"",
         password:"",
-        checked: []
+        kaptcha:"",
+        kaptcha_key:"",
       },
 
 
       show: true
     }
+  },
+
+  mounted() {
+    this.refreshCaptcha();
   }
+
   ,methods: {
 
+    refreshCaptcha(){
+      this.$axios.post(this.$rts.get_kaptcha).then((ret)=>{
 
+        this.kaptchaImg = "data:image/jpeg;base64,"+ret.data.payload.img;
+        this.req_data.kaptcha_key = ret.data.payload.key;
+
+      })
+    },
 
     req_UserLogin(){
 
@@ -122,14 +164,10 @@ export default {
     },
 
 
-
-
     onSubmit(evt) {
       evt.preventDefault()
       alert(JSON.stringify(this.req_data))
     },
-
-
 
 
     onReset(evt) {
@@ -137,6 +175,7 @@ export default {
       // Reset our form values
       this.req_data.username = ''
       this.req_data.password = ''
+      this.req_data.kaptcha = ''
       this.req_data.checked = []
       // Trick to reset/clear native browser form validation state
       this.show = false

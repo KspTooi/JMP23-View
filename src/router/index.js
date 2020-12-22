@@ -103,6 +103,11 @@ const routes = [
                 name: 'message',
                 component: () => import("@/views/admin/Message")
             }
+            ,{
+                path: 'sysrole',
+                name: 'sysrole',
+                component: () => import("@/views/admin/SysRole")
+            }
         ]
     }
 

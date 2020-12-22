@@ -191,7 +191,7 @@ router.beforeEach((to, from, next) => {
     if(to.path === "/logout"){
         console.log("用户登出!");
         sessionStorage.clear();
-        next(from);
+        next("/login");
     }
 
     next();

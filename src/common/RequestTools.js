@@ -1,6 +1,6 @@
 import axios from "axios";
 import swal from "sweetalert2";
-
+import router from '@/router'
 
 
 let server = "http://127.0.0.1:18001";
@@ -18,6 +18,9 @@ axios.interceptors.response.use(
         if(status === 401){
             //swal.fire("验证失败,请登录.", "", "error");
             sessionStorage.clear();
+            router.push("/login").then(r => {
+                console.log(r);
+            });
         }
 
 
@@ -55,6 +58,8 @@ export default {
     ,get_file_image:oss + "/"
 
     ,export_user:server + "/admin/v1/export/sysuser"
+
+    ,get_kaptcha:server + "/admin/kaptcha"
 
     ,insert_file_upload:server + "/admin/v1/files/insert"
 
@@ -167,6 +172,17 @@ export default {
     ,update_message:server + "/admin/v1/message/update"
 
     ,remove_message:server + "/admin/v1/message/remove"
+
+
+    ,list_role:server + "/admin/v1/role/list"
+
+    ,insert_role:server + "/admin/v1/role/insert"
+
+    ,update_role:server + "/admin/v1/role/update"
+
+    ,remove_role:server + "/admin/v1/role/remove"
+
+
 
 
 

@@ -270,6 +270,24 @@ export default {
             ,label:"操作"
         }
     ]
+    ,fields_role:[
+        {
+            key:"roleId"
+            ,label:"id"
+        },
+        {
+            key:"roleName"
+            ,label:"角色名"
+        },
+        {
+            key: "remark"
+            , label: "权限节点"
+        },
+        {
+            key:"options"
+            ,label:"操作"
+        }
+    ]
 
 
 
